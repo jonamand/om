@@ -65,6 +65,7 @@ export default function AdminPage() {
   const [tickets, setTickets] = useState<AdminTicket[]>([]);
   const [logs, setLogs] = useState<AuditLog[]>([]);
   const [loading, setLoading] = useState(true);
+  const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
   const loadData = useCallback(async () => {
     const [
@@ -135,7 +136,7 @@ export default function AdminPage() {
       <button
         key={item.id}
         className={`admin-nav-item ${tab === item.id ? "admin-nav-item-active" : ""}`}
-        onClick={() => setTab(item.id)}
+        onClick={() => { setTab(item.id); setMobileNavOpen(false); }}
       >
         <Icon className="w-[18px] h-[18px]" />
         <span>{item.label}</span>
@@ -170,7 +171,7 @@ export default function AdminPage() {
       <main className="admin-main">
         <header className="admin-topbar">
           <div className="flex items-center gap-3 min-w-0">
-            <button className="admin-mobile-menu lg:hidden" aria-label="Ouvrir le menu"><Menu className="w-5 h-5" /></button>
+            <button className="admin-mobile-menu lg:hidden" aria-label="Ouvrir le menu" onClick={() => setMobileNavOpen((v) => !v)}><Menu className="w-5 h-5" /></button>
             <div>
               <p className="admin-eyebrow">ESPACE ADMINISTRATEUR</p>
               <h1 className="admin-page-title">{activeLabel}</h1>
@@ -184,7 +185,7 @@ export default function AdminPage() {
             <div className="admin-avatar">{profile?.username?.slice(0, 2).toUpperCase() || "AO"}</div>
           </div>
         </header>
-        <div className="admin-mobile-nav lg:hidden">{tabs.map(renderTabButton)}</div>
+        {mobileNavOpen && <div className="admin-mobile-nav lg:hidden">{tabs.map(renderTabButton)}</div>}
         <div className="admin-content">
           {loading ? (
             <div className="flex items-center justify-center py-28"><div className="admin-spinner" /></div>
@@ -1130,6 +1131,7 @@ function ProductModal({ product, categories, onClose, onSaved, logAction }: {
   onSaved: () => void;
   logAction: (action: string, entityType: string, entityId?: string, details?: Record<string, unknown>) => Promise<void>;
 }) {
+  const { profile } = useAuth();
   const [name, setName] = useState(product?.name ?? "");
   const [description, setDescription] = useState(product?.description ?? "");
   const [price, setPrice] = useState(product?.price?.toString() ?? "");
@@ -1205,6 +1207,7 @@ function EventModal({ event, onClose, onSaved, logAction }: {
   onSaved: () => void;
   logAction: (action: string, entityType: string, entityId?: string, details?: Record<string, unknown>) => Promise<void>;
 }) {
+  const { profile } = useAuth();
   const [title, setTitle] = useState(event?.title ?? "");
   const [description, setDescription] = useState(event?.description ?? "");
   const [city, setCity] = useState(event?.city ?? "Abidjan");

@@ -57,6 +57,21 @@ export default function EventDetailPage() {
     if (!event) return;
 
     setRegistering(true);
+
+    const { data: existing } = await supabase
+      .from("tickets")
+      .select("id")
+      .eq("event_id", event.id)
+      .eq("user_id", session.user.id)
+      .neq("status", "cancelled")
+      .maybeSingle();
+
+    if (existing) {
+      alert("Vous êtes déjà inscrit à cet événement.");
+      setRegistering(false);
+      return;
+    }
+
     const code = `OM-${event.id.slice(0, 8).toUpperCase()}-${Date.now().toString(36).toUpperCase()}`;
     const qrData = `otakumania:event:${event.id}:user:${session.user.id}:code:${code}`;
 
@@ -69,6 +84,8 @@ export default function EventDetailPage() {
     });
 
     if (!error) {
+      await supabase.rpc("increment_registered_count", { p_event_id: event.id });
+      setEvent({ ...event, registered_count: event.registered_count + 1 });
       setTicketCode(code);
       setRegistered(true);
     }
