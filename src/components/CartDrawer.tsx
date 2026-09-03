@@ -68,7 +68,7 @@ export default function CartDrawer() {
                       {item.product.name}
                     </Link>
                     <p className="text-sakura-600 font-bold text-sm mt-1">
-                      {formatPrice(item.product.price, item.product.currency)}
+                      {Number(item.product.price) === 0 ? "Gratuit" : formatPrice(item.product.price, item.product.currency)}
                     </p>
                     <div className="flex items-center gap-2 mt-2">
                       <button

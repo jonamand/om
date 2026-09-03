@@ -395,7 +395,7 @@ function ProductsTab({ products, categories, loadData, logAction }: {
                     </div>
                   </td>
                   <td className="px-4 py-3 text-ink-500 hidden sm:table-cell">{p.category?.name ?? "—"}</td>
-                  <td className="px-4 py-3 font-bold text-ink-900">{formatPrice(p.price, p.currency)}</td>
+                  <td className="px-4 py-3 font-bold text-ink-900">{Number(p.price) === 0 ? "Gratuit" : formatPrice(p.price, p.currency)}</td>
                   <td className="px-4 py-3 text-ink-500 hidden md:table-cell">{p.download_count}</td>
                   <td className="px-4 py-3">
                     <button
@@ -1156,7 +1156,7 @@ function ProductModal({ product, categories, onClose, onSaved, logAction }: {
       await supabase.from("products").update(payload).eq("id", product.id);
       await logAction("update", "product", product.id, { name });
     } else {
-      const { data } = await supabase.from("products").insert(payload).select().maybeSingle();
+      const { data } = await supabase.from("products").insert({ ...payload, creator_id: profile?.id }).select().maybeSingle();
       if (data) await logAction("create", "product", data.id, { name });
     }
     setSaving(false);
@@ -1234,7 +1234,7 @@ function EventModal({ event, onClose, onSaved, logAction }: {
       await supabase.from("events").update(payload).eq("id", event.id);
       await logAction("update", "event", event.id, { title });
     } else {
-      const { data } = await supabase.from("events").insert(payload).select().maybeSingle();
+      const { data } = await supabase.from("events").insert({ ...payload, organizer_id: profile?.id }).select().maybeSingle();
       if (data) await logAction("create", "event", data.id, { title });
     }
     setSaving(false);
