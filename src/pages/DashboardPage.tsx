@@ -20,6 +20,7 @@ export default function DashboardPage() {
   const [orders, setOrders] = useState<Order[]>([]);
   const [tickets, setTickets] = useState<Ticket[]>([]);
   const [videoProducts, setVideoProducts] = useState<Product[]>([]);
+  const [downloadProducts, setDownloadProducts] = useState<Product[]>([]);
   const [activeVideo, setActiveVideo] = useState<Product | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -48,9 +49,10 @@ export default function DashboardPage() {
           .from("products")
           .select("*")
           .in("id", productIds)
-          .eq("file_type", "mp4")
           .neq("file_url", "#");
-        setVideoProducts(prodData as unknown as Product[] ?? []);
+        const all = prodData as unknown as Product[] ?? [];
+        setVideoProducts(all.filter((p) => p.file_type === "mp4"));
+        setDownloadProducts(all.filter((p) => p.file_type !== "mp4"));
       }
 
       setLoading(false);
@@ -185,15 +187,28 @@ export default function DashboardPage() {
       </div>
 
       {/* Download section */}
-      {orders.length > 0 && (
+      {downloadProducts.length > 0 && (
         <div className="card p-6 mt-6">
           <div className="flex items-center gap-2 mb-4">
             <Download className="w-5 h-5 text-matcha-600" />
-            <h2 className="font-display font-bold text-lg text-ink-900">Téléchargements</h2>
+            <h2 className="font-display font-bold text-lg text-ink-900">Mes fichiers téléchargeables</h2>
           </div>
-          <p className="text-sm text-ink-500">
-            Vos fichiers achetés sont disponibles immédiatement. Cliquez sur un produit pour télécharger son contenu.
-          </p>
+          <div className="space-y-3">
+            {downloadProducts.map((p) => (
+              <div key={p.id} className="flex items-center gap-3 p-3 rounded-xl bg-ink-50">
+                <div className="w-10 h-10 rounded-xl bg-ink-100 overflow-hidden flex-shrink-0">
+                  <img src={p.image_url} alt="" className="w-full h-full object-cover" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="font-medium text-sm text-ink-900 line-clamp-1">{p.name}</p>
+                  <p className="text-xs text-ink-400 uppercase">{p.file_type}</p>
+                </div>
+                <a href={p.file_url} download className="btn-outline text-sm py-2">
+                  <Download className="w-4 h-4" /> Télécharger
+                </a>
+              </div>
+            ))}
+          </div>
         </div>
       )}
 

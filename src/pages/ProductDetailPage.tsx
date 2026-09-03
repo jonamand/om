@@ -74,7 +74,8 @@ export default function ProductDetailPage() {
   }
 
   const isVideo = product?.file_type === "mp4";
-  const hasVideoUrl = Boolean(product?.file_url && product.file_url !== "#");
+  const hasFileUrl = Boolean(product?.file_url && product.file_url !== "#");
+  const hasDownloadableFile = !isVideo && hasFileUrl;
 
   if (loading) {
     return (
@@ -114,7 +115,7 @@ export default function ProductDetailPage() {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
           {/* Image or Video */}
-          {isVideo && hasVideoUrl ? (
+          {isVideo && hasFileUrl ? (
             hasPurchased ? (
               <VideoPlayer src={product.file_url} poster={product.image_url} title={product.name} />
             ) : (
@@ -165,7 +166,7 @@ export default function ProductDetailPage() {
             </div>
 
             <p className="font-display font-extrabold text-3xl text-ink-900 mb-6">
-              {formatPrice(product.price, product.currency)}
+              {Number(product.price) === 0 ? "Gratuit" : formatPrice(product.price, product.currency)}
             </p>
 
             <p className="text-ink-600 leading-relaxed mb-6">{product.description}</p>
@@ -173,7 +174,7 @@ export default function ProductDetailPage() {
             <div className="card p-4 bg-ink-50 border-ink-100 mb-6">
               <h3 className="font-semibold text-sm text-ink-900 mb-3">Ce que vous obtenez</h3>
               <ul className="space-y-2 text-sm text-ink-600">
-                {isVideo && hasVideoUrl ? (
+                {isVideo && hasFileUrl ? (
                   <li className="flex items-center gap-2"><Check className="w-4 h-4 text-matcha-500" /> Vidéo tutoriel HD en streaming après achat</li>
                 ) : (
                   <li className="flex items-center gap-2"><Check className="w-4 h-4 text-matcha-500" /> Fichier {product.file_type.toUpperCase()} téléchargeable immédiatement</li>
@@ -188,23 +189,45 @@ export default function ProductDetailPage() {
                 <p className="text-sm text-ink-500 text-center">Les administrateurs ne peuvent pas passer de commandes.</p>
               </div>
             ) : (
-              <div className="flex gap-3 mt-auto">
-                <button className="btn-primary flex-1 text-base py-3" onClick={handleAddToCart} disabled={added}>
-                  {added ? <><Check className="w-5 h-5" /> Ajouté !</> : <><ShoppingCart className="w-5 h-5" /> Ajouter au panier</>}
-                </button>
-                <button
-                  className="btn-secondary text-base py-3"
-                  onClick={() => {
-                    if (!session) {
-                      navigate("/connexion");
-                      return;
-                    }
-                    handleAddToCart();
-                    navigate("/checkout");
-                  }}
-                >
-                  <Download className="w-5 h-5" /> Acheter
-                </button>
+              <div className="space-y-3 mt-auto">
+                {hasPurchased && hasDownloadableFile && (
+                  <a
+                    href={product.file_url}
+                    download
+                    className="btn-secondary w-full text-base py-3"
+                  >
+                    <Download className="w-5 h-5" /> Télécharger le fichier
+                  </a>
+                )}
+                {hasPurchased && isVideo && hasFileUrl && (
+                  <a
+                    href={product.file_url}
+                    download
+                    className="btn-secondary w-full text-base py-3"
+                  >
+                    <Download className="w-5 h-5" /> Télécharger la vidéo
+                  </a>
+                )}
+                {!hasPurchased && (
+                  <div className="flex gap-3">
+                    <button className="btn-primary flex-1 text-base py-3" onClick={handleAddToCart} disabled={added}>
+                      {added ? <><Check className="w-5 h-5" /> Ajouté !</> : <><ShoppingCart className="w-5 h-5" /> Ajouter au panier</>}
+                    </button>
+                    <button
+                      className="btn-secondary text-base py-3"
+                      onClick={() => {
+                        if (!session) {
+                          navigate("/connexion");
+                          return;
+                        }
+                        handleAddToCart();
+                        navigate("/checkout");
+                      }}
+                    >
+                      <Download className="w-5 h-5" /> {Number(product.price) === 0 ? "Obtenir" : "Acheter"}
+                    </button>
+                  </div>
+                )}
               </div>
             )}
           </div>

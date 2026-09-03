@@ -15,6 +15,16 @@ export default function PaymentReturnPage() {
   useEffect(() => {
     async function verifyPayment() {
       const externalId = searchParams.get("ref");
+      const isFree = searchParams.get("free") === "1";
+
+      // Free order: already marked as paid during checkout, skip K-Pay verification
+      if (isFree && externalId) {
+        setOrderId(externalId);
+        clear();
+        setStatus("success");
+        return;
+      }
+
       const storedOrderId = sessionStorage.getItem("pending_order_id");
       const storedExternal = sessionStorage.getItem("pending_order_external");
       const paymentId = sessionStorage.getItem("pending_payment_id");

@@ -61,7 +61,7 @@ export function ProductCard({ product }: { product: Product }) {
 
         <div className="mt-auto pt-4 flex items-center justify-between">
           <span className="font-display font-bold text-lg text-ink-900">
-            {formatPrice(product.price, product.currency)}
+            {Number(product.price) === 0 ? "Gratuit" : formatPrice(product.price, product.currency)}
           </span>
           {!isAdmin && (
             <button

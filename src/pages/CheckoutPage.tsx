@@ -18,6 +18,38 @@ export default function CheckoutPage() {
     setError(null);
 
     try {
+      // Free order: create order + items and mark as paid immediately, skip payment gateway
+      if (total <= 0) {
+        const { data: order, error: orderError } = await supabase
+          .from("orders")
+          .insert({
+            user_id: session.user.id,
+            total: 0,
+            currency: "USD",
+            status: "paid",
+            payment_method: "free",
+          })
+          .select()
+          .maybeSingle();
+
+        if (orderError || !order) {
+          setError("Impossible de cr\u00e9er la commande. Veuillez r\u00e9essayer.");
+          setProcessing(false);
+          return;
+        }
+
+        const orderItems = items.map((item) => ({
+          order_id: order.id,
+          product_id: item.product.id,
+          price: item.product.price,
+        }));
+        await supabase.from("order_items").insert(orderItems);
+
+        clear();
+        window.location.href = `${window.location.origin}/paiement/retour?ref=${order.id}&free=1`;
+        return;
+      }
+
       const externalId = `CMD-${Date.now()}`;
       const returnUrl = `${window.location.origin}/paiement/retour?ref=${externalId}`;
       const cancelUrl = `${window.location.origin}/paiement/retour?ref=${externalId}&cancelled=1`;
@@ -188,7 +220,7 @@ export default function CheckoutPage() {
           <div className="border-t border-ink-100 pt-4 space-y-2">
             <div className="flex justify-between text-sm">
               <span className="text-ink-500">Sous-total</span>
-              <span className="font-medium">{formatPrice(total)}</span>
+              <span className="font-medium">{total <= 0 ? "Gratuit" : formatPrice(total)}</span>
             </div>
             <div className="flex justify-between text-sm">
               <span className="text-ink-500">Livraison</span>
@@ -196,11 +228,11 @@ export default function CheckoutPage() {
             </div>
             <div className="flex justify-between pt-2 border-t border-ink-100">
               <span className="font-display font-bold text-lg">Total</span>
-              <span className="font-display font-extrabold text-xl text-ink-900">{formatPrice(total)}</span>
+              <span className="font-display font-extrabold text-xl text-ink-900">{total <= 0 ? "Gratuit" : formatPrice(total)}</span>
             </div>
           </div>
           <button className="btn-primary w-full mt-5 text-base py-3" onClick={handleCheckout} disabled={processing}>
-            {processing ? <><Loader2 className="w-5 h-5 animate-spin" /> Redirection...</> : <>Payer {formatPrice(total)}</>}
+            {processing ? <><Loader2 className="w-5 h-5 animate-spin" /> Redirection...</> : total <= 0 ? <>Obtenir gratuitement</> : <>Payer {formatPrice(total)}</>}
           </button>
         </div>
       </div>

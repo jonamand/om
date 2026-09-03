@@ -14,6 +14,7 @@ import {
   type AdminTicket,
 } from "../lib/supabase";
 import { formatPrice, formatDate, formatDateShort, timeAgo, slugify } from "../lib/format";
+import DigitalFileUploadField from "../components/DigitalFileUploadField";
 import {
   LayoutDashboard,
   Package,
@@ -1134,7 +1135,7 @@ function ProductModal({ product, categories, onClose, onSaved, logAction }: {
   const [price, setPrice] = useState(product?.price?.toString() ?? "");
   const [categoryId, setCategoryId] = useState(product?.category_id ?? categories[0]?.id ?? "");
   const [imageUrl, setImageUrl] = useState(product?.image_url ?? "");
-  const [fileType, setFileType] = useState(product?.file_type ?? "pdf");
+  const [fileType, setFileType] = useState<"pdf" | "stl" | "mp4" | "zip">((product?.file_type as "pdf" | "stl" | "mp4" | "zip") ?? "pdf");
   const [fileUrl, setFileUrl] = useState(product?.file_url && product.file_url !== "#" ? product.file_url : "");
   const [tags, setTags] = useState(product?.tags?.join(", ") ?? "");
   const [status, setStatus] = useState(product?.status ?? "draft");
@@ -1147,7 +1148,7 @@ function ProductModal({ product, categories, onClose, onSaved, logAction }: {
       name, slug: slugify(name), description,
       price: parseFloat(price) || 0, currency: "USD",
       category_id: categoryId || null,
-      image_url: imageUrl, file_url: fileType === "mp4" ? (fileUrl || "#") : "#", file_type: fileType,
+      image_url: imageUrl, file_url: fileUrl || "#", file_type: fileType,
       tags: tags.split(",").map((t) => t.trim()).filter(Boolean),
       status,
     };
@@ -1168,13 +1169,13 @@ function ProductModal({ product, categories, onClose, onSaved, logAction }: {
         <Field label="Nom"><input type="text" required value={name} onChange={(e) => setName(e.target.value)} className="input-field" /></Field>
         <Field label="Description"><textarea required value={description} onChange={(e) => setDescription(e.target.value)} rows={3} className="input-field resize-none" /></Field>
         <div className="grid grid-cols-2 gap-3">
-          <Field label="Prix (USD)"><input type="number" step="0.01" required value={price} onChange={(e) => setPrice(e.target.value)} className="input-field" /></Field>
+          <Field label="Prix (USD) — 0 pour gratuit"><input type="number" step="0.01" min="0" required value={price} onChange={(e) => setPrice(e.target.value)} className="input-field" /></Field>
           <Field label="Type de fichier">
-            <select value={fileType} onChange={(e) => setFileType(e.target.value)} className="input-field">
-              <option value="pdf">PDF</option>
-              <option value="stl">STL (3D)</option>
-              <option value="mp4">Vidéo MP4</option>
-              <option value="zip">ZIP</option>
+            <select value={fileType} onChange={(e) => setFileType(e.target.value as "pdf" | "stl" | "mp4" | "zip")} className="input-field">
+              <option value="pdf">Patron Cosplay (PDF)</option>
+              <option value="stl">Modèle 3D Cosplay (STL)</option>
+              <option value="mp4">Vidéo Tutoriel (MP4)</option>
+              <option value="zip">Pack Cosplay Complet (ZIP)</option>
             </select>
           </Field>
         </div>
@@ -1183,12 +1184,7 @@ function ProductModal({ product, categories, onClose, onSaved, logAction }: {
             {categories.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}
           </select>
         </Field>
-        {fileType === "mp4" && (
-          <Field label="Lien de la vidéo (URL MP4)">
-            <input type="url" value={fileUrl} onChange={(e) => setFileUrl(e.target.value)} placeholder="https://..." className="input-field" />
-            <p className="text-xs text-ink-400 mt-1.5">Collez le lien direct vers le fichier vidéo MP4. La vidéo sera débloquée après achat.</p>
-          </Field>
-        )}
+        <DigitalFileUploadField fileType={fileType} value={fileUrl} onChange={setFileUrl} />
         <ImageUploadField label="Image du produit" value={imageUrl} onChange={setImageUrl} />
         <Field label="Tags (séparés par virgules)"><input type="text" value={tags} onChange={(e) => setTags(e.target.value)} placeholder="naruto, cosplay, patron" className="input-field" /></Field>
         <Field label="Statut">
