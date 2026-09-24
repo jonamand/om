@@ -59,7 +59,6 @@ export type Review = {
   user_id: string;
   rating: number;
   comment: string;
-  status: "pending" | "approved" | "rejected";
   created_at: string;
   profile?: Profile;
 };

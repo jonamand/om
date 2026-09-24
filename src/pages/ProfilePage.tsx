@@ -1,7 +1,16 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useAuth } from "../lib/auth";
 import { supabase } from "../lib/supabase";
-import { User, Save, Loader2, Check, AtSign } from "lucide-react";
+import { User, Save, Loader2, Check, AtSign, Camera, Crown, Shield, Zap, Star } from "lucide-react";
+
+const roleBadgeConfig: Record<string, { icon: typeof Crown; label: string; color: string; bg: string }> = {
+  super_admin: { icon: Crown, label: "Super Admin", color: "text-sun-600", bg: "bg-sun-50" },
+  admin_content: { icon: Shield, label: "Admin Contenu", color: "text-sky-600", bg: "bg-sky-50" },
+  admin_moderation: { icon: Zap, label: "Modérateur", color: "text-matcha-600", bg: "bg-matcha-50" },
+  creator: { icon: Star, label: "Créateur", color: "text-sakura-600", bg: "bg-sakura-50" },
+  organizer: { icon: Star, label: "Organisateur", color: "text-ink-600", bg: "bg-ink-100" },
+  user: { icon: Star, label: "Membre Otaku", color: "text-ink-500", bg: "bg-ink-100" },
+};
 
 export default function ProfilePage() {
   const { profile, session, refreshProfile } = useAuth();
@@ -10,6 +19,45 @@ export default function ProfilePage() {
   const [bio, setBio] = useState(profile?.bio ?? "");
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
+  const [uploadingAvatar, setUploadingAvatar] = useState(false);
+  const [avatarUrl, setAvatarUrl] = useState<string | null>(profile?.avatar_url ?? null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  async function handleAvatarUpload(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file || !session) return;
+
+    if (file.size > 5 * 1024 * 1024) {
+      alert("L'image ne doit pas dépasser 5 Mo.");
+      return;
+    }
+
+    setUploadingAvatar(true);
+    const ext = file.name.split(".").pop();
+    const path = `avatars/${session.user.id}.${ext}`;
+
+    const { error: uploadError } = await supabase.storage
+      .from("avatars")
+      .upload(path, file, { upsert: true });
+
+    if (uploadError) {
+      alert("Erreur lors du téléversement de l'image.");
+      setUploadingAvatar(false);
+      return;
+    }
+
+    const { data: urlData } = supabase.storage.from("avatars").getPublicUrl(path);
+    const publicUrl = urlData.publicUrl;
+
+    await supabase
+      .from("profiles")
+      .update({ avatar_url: publicUrl })
+      .eq("id", session.user.id);
+
+    setAvatarUrl(publicUrl);
+    await refreshProfile();
+    setUploadingAvatar(false);
+  }
 
   async function handleSave(e: React.FormEvent) {
     e.preventDefault();
@@ -25,23 +73,55 @@ export default function ProfilePage() {
     setTimeout(() => setSaved(false), 2000);
   }
 
+  const roleKey = profile?.role ?? "user";
+  const badge = roleBadgeConfig[roleKey] ?? roleBadgeConfig.user;
+
   return (
     <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-8 animate-fade-in">
       <h1 className="font-display font-extrabold text-2xl text-ink-900 mb-6">Mon profil</h1>
 
+      {/* Profile card with avatar + badge */}
       <div className="card p-6 mb-6">
         <div className="flex items-center gap-4">
-          <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-sakura-400 to-sakura-600 flex items-center justify-center text-white font-bold text-2xl">
-            {profile?.username?.[0]?.toUpperCase() ?? "U"}
+          <div className="relative group">
+            <button
+              onClick={() => fileInputRef.current?.click()}
+              className="w-20 h-20 rounded-2xl overflow-hidden bg-gradient-to-br from-sakura-400 to-sakura-600 flex items-center justify-center text-white font-bold text-2xl transition-all hover:opacity-80"
+              title="Changer l'avatar"
+            >
+              {avatarUrl ? (
+                <img src={avatarUrl} alt={profile?.username ?? "Avatar"} className="w-full h-full object-cover" />
+              ) : (
+                profile?.username?.[0]?.toUpperCase() ?? "U"
+              )}
+            </button>
+            <div className="absolute inset-0 rounded-2xl bg-ink-950/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+              <Camera className="w-6 h-6 text-white" />
+            </div>
+            {uploadingAvatar && (
+              <div className="absolute inset-0 rounded-2xl bg-ink-950/50 flex items-center justify-center">
+                <Loader2 className="w-6 h-6 text-white animate-spin" />
+              </div>
+            )}
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept="image/*"
+              className="hidden"
+              onChange={handleAvatarUpload}
+            />
           </div>
           <div>
             <p className="font-display font-bold text-lg text-ink-900">{profile?.full_name}</p>
             <p className="text-sm text-ink-500">@{profile?.username}</p>
-            <span className="badge bg-sakura-50 text-sakura-600 mt-1">
-              {profile?.role.replace("_", " ")}
+            <span className={`badge mt-1.5 ${badge.bg} ${badge.color}`}>
+              <badge.icon className="w-3.5 h-3.5" /> {badge.label}
             </span>
           </div>
         </div>
+        <p className="text-xs text-ink-400 mt-3 flex items-center gap-1.5">
+          <Camera className="w-3.5 h-3.5" /> Cliquez sur la photo pour changer votre avatar (max 5 Mo)
+        </p>
       </div>
 
       <form onSubmit={handleSave} className="card p-6 space-y-4">

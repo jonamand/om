@@ -48,25 +48,25 @@ export default function Navbar() {
   return (
     <header
       className={`sticky top-0 z-50 transition-all duration-300 ${
-        scrolled ? "glass shadow-sm" : "bg-white border-b border-ink-100"
+        scrolled ? "glass shadow-lg shadow-black/20" : "bg-transparent border-b border-white/5"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-18">
           <div className="flex items-center gap-3">
             <button
-              className="lg:hidden p-2 -ml-2 text-ink-600 hover:text-ink-900"
+              className="lg:hidden p-2 -ml-2 text-white/70 hover:text-white"
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label="Menu"
             >
               {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
             <Link to="/" className="flex items-center gap-2 group">
-              <div className="w-9 h-9 rounded-xl bg-ink-900 flex items-center justify-center transition-transform group-hover:scale-105">
-                <Sparkles className="w-5 h-5 text-sakura-400" />
+              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-neon-500 to-sakura-500 flex items-center justify-center transition-transform group-hover:scale-105 shadow-lg shadow-neon-500/30">
+                <Sparkles className="w-5 h-5 text-white" />
               </div>
-              <span className="font-display font-extrabold text-lg text-ink-900 tracking-tight">
-                Otaku<span className="text-sakura-500">Mania</span>
+              <span className="font-display font-extrabold text-lg text-white tracking-tight">
+                Otaku<span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-400 to-sakura-400">Mania</span>
               </span>
             </Link>
           </div>
@@ -78,8 +78,8 @@ export default function Navbar() {
                 to={link.to}
                 className={`px-4 py-2 rounded-xl font-medium text-sm transition-all duration-200 ${
                   location.pathname.startsWith(link.to)
-                    ? "text-sakura-600 bg-sakura-50"
-                    : "text-ink-600 hover:text-ink-900 hover:bg-ink-50"
+                    ? "text-white bg-white/10"
+                    : "text-white/60 hover:text-white hover:bg-white/5"
                 }`}
               >
                 {link.label}
@@ -89,7 +89,7 @@ export default function Navbar() {
 
           <div className="flex items-center gap-2">
             <button
-              className="p-2 text-ink-600 hover:text-ink-900 hover:bg-ink-100 rounded-xl transition-all hidden sm:block"
+              className="p-2 text-white/60 hover:text-white hover:bg-white/10 rounded-xl transition-all hidden sm:block"
               aria-label="Rechercher"
             >
               <Search className="w-5 h-5" />
@@ -97,7 +97,7 @@ export default function Navbar() {
 
             {!isAdmin && (
               <button
-                className="relative p-2 text-ink-600 hover:text-ink-900 hover:bg-ink-100 rounded-xl transition-all"
+                className="relative p-2 text-white/60 hover:text-white hover:bg-white/10 rounded-xl transition-all"
                 onClick={() => setOpen(true)}
                 aria-label="Panier"
               >
@@ -113,35 +113,44 @@ export default function Navbar() {
             {session ? (
               <div className="relative">
                 <button
-                  className="flex items-center gap-2 p-1.5 pr-3 rounded-xl hover:bg-ink-100 transition-all"
+                  className="flex items-center gap-2 p-1.5 pr-3 rounded-xl hover:bg-white/10 transition-all"
                   onClick={() => setUserMenuOpen(!userMenuOpen)}
                 >
-                  <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-sakura-400 to-sakura-600 flex items-center justify-center text-white text-xs font-bold">
-                    {profile?.username?.[0]?.toUpperCase() ?? "U"}
+                  <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-neon-500 to-sakura-500 flex items-center justify-center text-white text-xs font-bold overflow-hidden">
+                    {profile?.avatar_url ? (
+                      <img src={profile.avatar_url} alt="" className="w-full h-full object-cover" />
+                    ) : (
+                      profile?.username?.[0]?.toUpperCase() ?? "U"
+                    )}
                   </div>
-                  <span className="hidden sm:block text-sm font-medium text-ink-700">
+                  <span className="hidden sm:block text-sm font-medium text-white/80">
                     {profile?.username}
                   </span>
                 </button>
                 {userMenuOpen && (
                   <>
                     <div className="fixed inset-0 z-40" onClick={() => setUserMenuOpen(false)} />
-                    <div className="absolute right-0 mt-2 w-56 bg-white rounded-2xl shadow-xl border border-ink-100 py-2 z-50 animate-slide-down">
-                      <div className="px-4 py-2 border-b border-ink-100">
-                        <p className="text-sm font-semibold text-ink-900">{profile?.full_name}</p>
-                        <p className="text-xs text-ink-400">{profile?.role.replace("_", " ")}</p>
+                    <div className="absolute right-0 mt-2 w-56 rounded-2xl shadow-xl border border-white/10 py-2 z-50 animate-slide-down backdrop-blur-xl bg-ink-300/95">
+                      <div className="px-4 py-2 border-b border-white/10">
+                        <p className="text-sm font-semibold text-white">{profile?.full_name}</p>
+                        <p className="text-xs text-white/40">{profile?.role.replace("_", " ")}</p>
                       </div>
                       {isAdmin ? (
-                        <Link to="/admin" className="flex items-center gap-3 px-4 py-2.5 text-sm text-ink-700 hover:bg-ink-50">
+                        <Link to="/admin" className="flex items-center gap-3 px-4 py-2.5 text-sm text-white/70 hover:bg-white/5">
                           <Shield className="w-4 h-4" /> Administration
                         </Link>
                       ) : (
-                        <Link to="/profil" className="flex items-center gap-3 px-4 py-2.5 text-sm text-ink-700 hover:bg-ink-50">
-                          <User className="w-4 h-4" /> Mon profil
-                        </Link>
+                        <>
+                          <Link to="/mon-espace" className="flex items-center gap-3 px-4 py-2.5 text-sm text-white/70 hover:bg-white/5">
+                            <ShoppingBag className="w-4 h-4" /> Mon Espace
+                          </Link>
+                          <Link to="/profil" className="flex items-center gap-3 px-4 py-2.5 text-sm text-white/70 hover:bg-white/5">
+                            <User className="w-4 h-4" /> Mon profil
+                          </Link>
+                        </>
                       )}
                       <button
-                        className="flex items-center gap-3 px-4 py-2.5 text-sm text-error-600 hover:bg-error-50 w-full"
+                        className="flex items-center gap-3 px-4 py-2.5 text-sm text-error-500 hover:bg-error-500/10 w-full"
                         onClick={() => {
                           signOut();
                           navigate("/");
@@ -168,15 +177,15 @@ export default function Navbar() {
         </div>
 
         {mobileOpen && (
-          <div className="lg:hidden py-4 border-t border-ink-100 animate-slide-down">
+          <div className="lg:hidden py-4 border-t border-white/5 animate-slide-down">
             <nav className="flex flex-col gap-1">
               {navLinks.map((link) => (
                 <Link
                   key={link.to}
                   to={link.to}
-                  className="flex items-center gap-3 px-4 py-3 rounded-xl text-ink-700 hover:bg-ink-50 font-medium"
+                  className="flex items-center gap-3 px-4 py-3 rounded-xl text-white/70 hover:bg-white/5 font-medium"
                 >
-                  <link.icon className="w-5 h-5 text-ink-400" />
+                  <link.icon className="w-5 h-5 text-white/40" />
                   {link.label}
                 </Link>
               ))}

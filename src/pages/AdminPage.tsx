@@ -120,7 +120,7 @@ export default function AdminPage() {
     { id: "products", label: "Produits", icon: Package },
     { id: "events", label: "Événements", icon: Calendar },
     { id: "users", label: "Utilisateurs", icon: Users },
-    { id: "reviews", label: "Avis", icon: Star, badge: reviews.filter((r) => r.status === "pending").length },
+    { id: "reviews", label: "Avis", icon: Star, badge: 0 },
     { id: "news", label: "Actualités", icon: Newspaper },
     { id: "orders", label: "Commandes", icon: ShoppingCart },
     { id: "logs", label: "Journal", icon: ScrollText },
@@ -672,16 +672,6 @@ function ReviewsTab({ reviews, loadData, logAction }: {
   loadData: () => Promise<void>;
   logAction: (action: string, entityType: string, entityId?: string, details?: Record<string, unknown>) => Promise<void>;
 }) {
-  const [filter, setFilter] = useState<"pending" | "approved" | "rejected" | "all">("pending");
-
-  const filtered = filter === "all" ? reviews : reviews.filter((r) => r.status === filter);
-
-  async function moderateReview(r: Review, newStatus: "approved" | "rejected") {
-    await supabase.from("reviews").update({ status: newStatus }).eq("id", r.id);
-    await logAction(newStatus === "approved" ? "approve_review" : "reject_review", "review", r.id, { product_id: r.product_id });
-    loadData();
-  }
-
   async function deleteReview(id: string) {
     if (!confirm("Supprimer cet avis ?")) return;
     await supabase.from("reviews").delete().eq("id", id);
@@ -689,38 +679,20 @@ function ReviewsTab({ reviews, loadData, logAction }: {
     loadData();
   }
 
-  const counts = {
-    pending: reviews.filter((r) => r.status === "pending").length,
-    approved: reviews.filter((r) => r.status === "approved").length,
-    rejected: reviews.filter((r) => r.status === "rejected").length,
-    all: reviews.length,
-  };
-
   return (
     <div>
-      <div className="flex gap-2 mb-4">
-        {(["pending", "approved", "rejected", "all"] as const).map((f) => (
-          <button
-            key={f}
-            className={`px-4 py-2 rounded-xl font-medium text-sm transition-all ${
-              filter === f ? "bg-ink-900 text-white" : "bg-white border border-ink-200 text-ink-600 hover:border-ink-300"
-            }`}
-            onClick={() => setFilter(f)}
-          >
-            {f === "pending" ? "En attente" : f === "approved" ? "Approuvés" : f === "rejected" ? "Rejetés" : "Tous"}
-            <span className="ml-1.5 text-xs opacity-60">({counts[f]})</span>
-          </button>
-        ))}
+      <div className="flex items-center justify-between mb-4">
+        <span className="text-sm text-ink-400">{reviews.length} avis publié{reviews.length > 1 ? "s" : ""}</span>
       </div>
 
-      {filtered.length === 0 ? (
+      {reviews.length === 0 ? (
         <div className="card p-12 text-center">
           <Star className="w-10 h-10 text-ink-200 mx-auto mb-3" />
-          <p className="text-ink-400">Aucun avis dans cette catégorie</p>
+          <p className="text-ink-400">Aucun avis pour le moment</p>
         </div>
       ) : (
         <div className="space-y-3">
-          {filtered.map((r) => (
+          {reviews.map((r) => (
             <div key={r.id} className="card p-5">
               <div className="flex items-start justify-between gap-4">
                 <div className="flex items-start gap-3 flex-1 min-w-0">
@@ -735,29 +707,12 @@ function ReviewsTab({ reviews, loadData, logAction }: {
                           <Star key={i} className={`w-3.5 h-3.5 ${i < r.rating ? "fill-sun-400 text-sun-400" : "text-ink-200"}`} />
                         ))}
                       </div>
-                      <span className={`badge text-[10px] ${
-                        r.status === "approved" ? "bg-matcha-50 text-matcha-600" :
-                        r.status === "pending" ? "bg-sun-50 text-sun-600" :
-                        "bg-error-50 text-error-600"
-                      }`}>
-                        {r.status === "approved" ? "Approuvé" : r.status === "pending" ? "En attente" : "Rejeté"}
-                      </span>
                     </div>
                     {r.comment && <p className="text-sm text-ink-600 leading-relaxed">{r.comment}</p>}
                     <p className="text-xs text-ink-400 mt-1">{timeAgo(r.created_at)}</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-1 flex-shrink-0">
-                  {r.status !== "approved" && (
-                    <button className="p-2 rounded-lg text-matcha-600 hover:bg-matcha-50" onClick={() => moderateReview(r, "approved")} title="Approuver">
-                      <CheckCircle2 className="w-5 h-5" />
-                    </button>
-                  )}
-                  {r.status !== "rejected" && (
-                    <button className="p-2 rounded-lg text-error-600 hover:bg-error-50" onClick={() => moderateReview(r, "rejected")} title="Rejeter">
-                      <XCircle className="w-5 h-5" />
-                    </button>
-                  )}
                   <button className="p-2 rounded-lg text-ink-400 hover:bg-error-50 hover:text-error-600" onClick={() => deleteReview(r.id)} title="Supprimer">
                     <Trash2 className="w-5 h-5" />
                   </button>

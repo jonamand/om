@@ -60,25 +60,27 @@ export default function HomePage() {
   return (
     <div className="animate-fade-in">
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-ink-950 text-white">
-        <div className="absolute inset-0">
-          <div className="absolute top-1/4 -left-32 w-96 h-96 bg-sakura-500/20 rounded-full blur-3xl animate-float" />
-          <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-sky-500/20 rounded-full blur-3xl animate-float" style={{ animationDelay: "2s" }} />
+      <section className="relative overflow-hidden bg-ink-600 bg-dot-grid">
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-1/4 -left-32 w-96 h-96 bg-neon-500/20 rounded-full blur-3xl animate-glow" />
+          <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-sakura-500/20 rounded-full blur-3xl animate-glow" style={{ animationDelay: "1.5s" }} />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-cyan-500/10 rounded-full blur-3xl animate-glow" style={{ animationDelay: "3s" }} />
         </div>
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-28">
           <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-sm text-sm font-medium mb-6 animate-slide-down">
-              <Sparkles className="w-4 h-4 text-sakura-400" />
-              La plateforme geek #1 d'Afrique de l'Ouest
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 backdrop-blur-md border border-white/10 text-sm font-medium mb-6 animate-slide-down">
+              <Sparkles className="w-4 h-4 text-neon-400" />
+              <span className="text-white/80">La plateforme geek #1 d'Afrique de l'Ouest</span>
             </div>
 
             <h1 className="font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl leading-[1.1] tracking-tight text-balance animate-slide-up">
-              Achetez, célébrez et connectez-vous avec la{" "}
-              <span className="text-sakura-400">communauté otaku</span> d'Afrique
+              <span className="text-white">Achetez, célébrez et connectez-vous avec la</span>{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-400 via-sakura-400 to-cyan-400 neon-text">communauté otaku</span>{" "}
+              <span className="text-white">d'Afrique</span>
             </h1>
 
-            <p className="mt-6 text-lg text-ink-300 max-w-2xl leading-relaxed animate-slide-up" style={{ animationDelay: "0.1s" }}>
+            <p className="mt-6 text-lg text-white/60 max-w-2xl leading-relaxed animate-slide-up" style={{ animationDelay: "0.1s" }}>
               Templates cosplay, fichiers 3D, tutoriels vidéo, conventions, concours et tournois e-sport.
               Tout l'écosystème geek réuni sur une seule plateforme, pensée pour le mobile et les paiements locaux.
             </p>
@@ -88,7 +90,7 @@ export default function HomePage() {
                 <ShoppingBag className="w-5 h-5" />
                 Explorer la boutique
               </Link>
-              <Link to="/evenements" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold bg-white/10 backdrop-blur-sm hover:bg-white/20 transition-all">
+              <Link to="/evenements" className="btn-secondary text-base px-6 py-3">
                 <Calendar className="w-5 h-5" />
                 Voir les événements
               </Link>
@@ -96,16 +98,16 @@ export default function HomePage() {
 
             <div className="mt-12 grid grid-cols-3 gap-6 max-w-lg animate-slide-up" style={{ animationDelay: "0.3s" }}>
               <div>
-                <p className="text-3xl font-display font-bold text-white">500K+</p>
-                <p className="text-sm text-ink-400">Fans potentiels</p>
+                <p className="text-3xl font-display font-bold text-transparent bg-clip-text bg-gradient-to-r from-neon-400 to-sakura-400">500K+</p>
+                <p className="text-sm text-white/40">Fans potentiels</p>
               </div>
               <div>
-                <p className="text-3xl font-display font-bold text-white">6</p>
-                <p className="text-sm text-ink-400">Pays visés</p>
+                <p className="text-3xl font-display font-bold text-transparent bg-clip-text bg-gradient-to-r from-sakura-400 to-cyan-400">6</p>
+                <p className="text-sm text-white/40">Pays visés</p>
               </div>
               <div>
-                <p className="text-3xl font-display font-bold text-white">100+</p>
-                <p className="text-sm text-ink-400">Produits au lancement</p>
+                <p className="text-3xl font-display font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-neon-400">100+</p>
+                <p className="text-sm text-white/40">Produits au lancement</p>
               </div>
             </div>
           </div>
@@ -113,34 +115,34 @@ export default function HomePage() {
       </section>
 
       {/* Features Strip */}
-      <section className="bg-white border-b border-ink-100">
+      <section className="border-b border-white/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-2xl bg-sakura-50 flex items-center justify-center flex-shrink-0">
-                <Zap className="w-6 h-6 text-sakura-500" />
+              <div className="w-12 h-12 rounded-2xl bg-neon-500/10 border border-neon-500/20 flex items-center justify-center flex-shrink-0">
+                <Zap className="w-6 h-6 text-neon-400" />
               </div>
               <div>
-                <h3 className="font-semibold text-ink-900">Optimisé 3G</h3>
-                <p className="text-sm text-ink-500">Chargement rapide même sur connexion lente</p>
+                <h3 className="font-semibold text-white">Optimisé 3G</h3>
+                <p className="text-sm text-white/50">Chargement rapide même sur connexion lente</p>
               </div>
             </div>
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-2xl bg-matcha-50 flex items-center justify-center flex-shrink-0">
-                <Shield className="w-6 h-6 text-matcha-600" />
+              <div className="w-12 h-12 rounded-2xl bg-matcha-500/10 border border-matcha-500/20 flex items-center justify-center flex-shrink-0">
+                <Shield className="w-6 h-6 text-matcha-400" />
               </div>
               <div>
-                <h3 className="font-semibold text-ink-900">Paiements sécurisés</h3>
-                <p className="text-sm text-ink-500">Mobile Money, Wave, Orange, cartes bancaires</p>
+                <h3 className="font-semibold text-white">Paiements sécurisés</h3>
+                <p className="text-sm text-white/50">Mobile Money, Wave, Orange, cartes bancaires</p>
               </div>
             </div>
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-2xl bg-sky-50 flex items-center justify-center flex-shrink-0">
-                <Globe className="w-6 h-6 text-sky-600" />
+              <div className="w-12 h-12 rounded-2xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center flex-shrink-0">
+                <Globe className="w-6 h-6 text-cyan-400" />
               </div>
               <div>
-                <h3 className="font-semibold text-ink-900">Conçu pour l'Afrique</h3>
-                <p className="text-sm text-ink-500">Interface en français, mobile-first</p>
+                <h3 className="font-semibold text-white">Conçu pour l'Afrique</h3>
+                <p className="text-sm text-white/50">Interface en français, mobile-first</p>
               </div>
             </div>
           </div>
@@ -151,10 +153,10 @@ export default function HomePage() {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="flex items-end justify-between mb-8">
           <div>
-            <p className="text-sakura-600 font-semibold text-sm uppercase tracking-wider mb-2">Boutique</p>
+            <p className="text-neon-400 font-semibold text-sm uppercase tracking-wider mb-2">Boutique</p>
             <h2 className="section-title">Produits populaires</h2>
           </div>
-          <Link to="/boutique" className="btn-ghost text-sakura-600 hover:text-sakura-700">
+          <Link to="/boutique" className="btn-ghost text-neon-400 hover:text-neon-300">
             Tout voir <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
@@ -167,14 +169,14 @@ export default function HomePage() {
       </section>
 
       {/* Upcoming Events */}
-      <section className="bg-ink-50 py-16">
+      <section className="bg-ink-500/30 py-16 border-y border-white/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-end justify-between mb-8">
             <div>
-              <p className="text-sky-600 font-semibold text-sm uppercase tracking-wider mb-2">Événements</p>
+              <p className="text-cyan-400 font-semibold text-sm uppercase tracking-wider mb-2">Événements</p>
               <h2 className="section-title">À venir près de chez vous</h2>
             </div>
-            <Link to="/evenements" className="btn-ghost text-sky-600 hover:text-sky-700">
+            <Link to="/evenements" className="btn-ghost text-cyan-400 hover:text-cyan-300">
               Tout voir <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
@@ -191,28 +193,28 @@ export default function HomePage() {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Community Hub */}
-          <div className="card p-8 bg-gradient-to-br from-ink-950 to-ink-800 text-white border-0">
+          <div className="card p-8 bg-gradient-to-br from-neon-500/10 to-sakura-500/5 border-white/10">
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center">
-                <Users className="w-6 h-6 text-sakura-400" />
+              <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center">
+                <Users className="w-6 h-6 text-neon-400" />
               </div>
               <div>
                 <h2 className="font-display font-bold text-xl text-white">Rejoignez la communauté</h2>
-                <p className="text-sm text-ink-400">Plus de 500 000 fans vous attendent</p>
+                <p className="text-sm text-white/40">Plus de 500 000 fans vous attendent</p>
               </div>
             </div>
-            <p className="text-ink-300 mb-6 leading-relaxed">
+            <p className="text-white/60 mb-6 leading-relaxed">
               Connectez-vous avec la communauté geek et otaku d'Afrique de l'Ouest. Partagez vos créations,
               participez aux événements et échangez avec des milliers de passionnés.
             </p>
             <div className="flex gap-3">
-              <a href="#" className="flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-[#5865F2] hover:bg-[#4752c4] transition-colors font-medium text-sm">
+              <a href="#" className="flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-[#5865F2]/20 border border-[#5865F2]/30 hover:bg-[#5865F2]/30 transition-colors font-medium text-sm text-[#aab3ff]">
                 <MessageCircle className="w-4 h-4" /> Discord
               </a>
-              <a href="#" className="flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-[#0088cc] hover:bg-[#006699] transition-colors font-medium text-sm">
+              <a href="#" className="flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-cyan-500/15 border border-cyan-500/25 hover:bg-cyan-500/25 transition-colors font-medium text-sm text-cyan-300">
                 <Send className="w-4 h-4" /> Telegram
               </a>
-              <a href="#" className="flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-[#25D366] hover:bg-[#1da851] transition-colors font-medium text-sm">
+              <a href="#" className="flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-matcha-500/15 border border-matcha-500/25 hover:bg-matcha-500/25 transition-colors font-medium text-sm text-matcha-300">
                 <MessageCircle className="w-4 h-4" /> WhatsApp
               </a>
             </div>
@@ -244,11 +246,11 @@ export default function HomePage() {
                   className="card card-hover p-5 block"
                 >
                   <div className="flex items-center gap-2 mb-2">
-                    <span className="badge bg-sakura-50 text-sakura-600">News</span>
-                    <span className="text-xs text-ink-400">{formatDate(article.created_at)}</span>
+                    <span className="badge bg-sakura-500/15 text-sakura-300">News</span>
+                    <span className="text-xs text-white/40">{formatDate(article.created_at)}</span>
                   </div>
-                  <h3 className="font-display font-semibold text-ink-900 mb-1 line-clamp-2">{article.title}</h3>
-                  <p className="text-sm text-ink-500 line-clamp-2">{article.excerpt}</p>
+                  <h3 className="font-display font-semibold text-white mb-1 line-clamp-2">{article.title}</h3>
+                  <p className="text-sm text-white/50 line-clamp-2">{article.excerpt}</p>
                 </Link>
               ))
             )}
@@ -257,15 +259,16 @@ export default function HomePage() {
       </section>
 
       {/* CTA */}
-      <section className="bg-sakura-500 py-16">
-        <div className="max-w-4xl mx-auto px-4 text-center">
-          <h2 className="font-display font-extrabold text-3xl lg:text-4xl text-white mb-4 text-balance">
+      <section className="relative overflow-hidden py-16">
+        <div className="absolute inset-0 bg-gradient-to-r from-neon-600 via-sakura-600 to-neon-600 animate-pulse-slow" />
+        <div className="relative max-w-4xl mx-auto px-4 text-center">
+          <h2 className="font-display font-extrabold text-3xl lg:text-4xl text-white mb-4 text-balance neon-text">
             Prêt à rejoindre l'aventure otaku ?
           </h2>
-          <p className="text-sakura-100 text-lg mb-8 max-w-2xl mx-auto">
+          <p className="text-white/80 text-lg mb-8 max-w-2xl mx-auto">
             Créez votre compte gratuitement et accédez à des centaines de produits, événements et à toute la communauté.
           </p>
-          <Link to="/inscription" className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-white text-sakura-600 font-bold hover:bg-sakura-50 transition-all shadow-lg hover:shadow-xl text-base">
+          <Link to="/inscription" className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-white text-neon-600 font-bold hover:bg-white/90 transition-all shadow-2xl hover:shadow-neon-500/30 text-base">
             Créer mon compte <ArrowRight className="w-5 h-5" />
           </Link>
         </div>

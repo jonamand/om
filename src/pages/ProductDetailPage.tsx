@@ -28,6 +28,10 @@ export default function ProductDetailPage() {
   const [loading, setLoading] = useState(true);
   const [added, setAdded] = useState(false);
   const [hasPurchased, setHasPurchased] = useState(false);
+  const [reviewRating, setReviewRating] = useState(0);
+  const [reviewComment, setReviewComment] = useState("");
+  const [reviewHover, setReviewHover] = useState(0);
+  const [submittingReview, setSubmittingReview] = useState(false);
 
   useEffect(() => {
     if (!slug) return;
@@ -46,7 +50,6 @@ export default function ProductDetailPage() {
           .from("reviews")
           .select("*, profile:profiles(*)")
           .eq("product_id", data.id)
-          .eq("status", "approved")
           .order("created_at", { ascending: false });
         setReviews(revData as unknown as Review[] ?? []);
 
@@ -71,6 +74,28 @@ export default function ProductDetailPage() {
     addItem(product);
     setAdded(true);
     setTimeout(() => setAdded(false), 2000);
+  }
+
+  async function handleSubmitReview() {
+    if (!session || !product || reviewRating === 0) return;
+    setSubmittingReview(true);
+    const { data } = await supabase
+      .from("reviews")
+      .insert({
+        product_id: product.id,
+        user_id: session.user.id,
+        rating: reviewRating,
+        comment: reviewComment.trim() || null,
+      })
+      .select("*, profile:profiles(*)")
+      .maybeSingle();
+
+    if (data) {
+      setReviews([data as unknown as Review, ...reviews]);
+      setReviewRating(0);
+      setReviewComment("");
+    }
+    setSubmittingReview(false);
   }
 
   const isVideo = product?.file_type === "mp4";
@@ -236,10 +261,55 @@ export default function ProductDetailPage() {
         {/* Reviews */}
         <section className="mt-16">
           <h2 className="section-title mb-6">Avis de la communauté</h2>
+
+          {/* Review submission form */}
+          {session ? (
+            <div className="card p-6 mb-6">
+              <h3 className="font-display font-bold text-base text-ink-900 mb-4">Laisser un avis</h3>
+              <div className="flex items-center gap-1 mb-4">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <button
+                    key={i}
+                    type="button"
+                    onMouseEnter={() => setReviewHover(i + 1)}
+                    onMouseLeave={() => setReviewHover(0)}
+                    onClick={() => setReviewRating(i + 1)}
+                    className="p-1 transition-transform hover:scale-110"
+                  >
+                    <Star className={`w-7 h-7 ${(reviewHover || reviewRating) > i ? "fill-sun-400 text-sun-400" : "text-ink-200"}`} />
+                  </button>
+                ))}
+                <span className="ml-2 text-sm text-ink-500">
+                  {reviewRating > 0 ? `${reviewRating} étoile${reviewRating > 1 ? "s" : ""}` : "Cliquez pour noter"}
+                </span>
+              </div>
+              <textarea
+                value={reviewComment}
+                onChange={(e) => setReviewComment(e.target.value)}
+                placeholder="Commentaire (optionnel)..."
+                rows={3}
+                className="input-field resize-none mb-3"
+              />
+              <button
+                className="btn-primary"
+                disabled={reviewRating === 0 || submittingReview}
+                onClick={handleSubmitReview}
+              >
+                {submittingReview ? <Loader2 className="w-5 h-5 animate-spin" /> : "Publier mon avis"}
+              </button>
+            </div>
+          ) : (
+            <div className="card p-6 mb-6 text-center">
+              <p className="text-sm text-ink-500">
+                <Link to="/connexion" className="text-sakura-600 font-medium">Connectez-vous</Link> pour laisser un avis.
+              </p>
+            </div>
+          )}
+
           {reviews.length === 0 ? (
             <div className="card p-8 text-center">
               <Star className="w-10 h-10 text-ink-200 mx-auto mb-3" />
-              <p className="text-ink-500">Aucun avis pour le moment. Soyez le premier à donner votre avis après achat !</p>
+              <p className="text-ink-500">Aucun avis pour le moment. Soyez le premier à donner votre avis !</p>
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

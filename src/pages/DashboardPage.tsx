@@ -4,6 +4,7 @@ import { useAuth } from "../lib/auth";
 import { supabase, type Order, type Ticket, type Product } from "../lib/supabase";
 import { formatPrice, formatDate } from "../lib/format";
 import VideoPlayer from "../components/VideoPlayer";
+import { QRCodeSVG } from "qrcode.react";
 import {
   Download,
   Ticket as TicketIcon,
@@ -13,7 +14,21 @@ import {
   Package,
   TrendingUp,
   PlayCircle,
+  Crown,
+  Shield,
+  Zap,
+  Star,
+  X,
 } from "lucide-react";
+
+const roleBadgeConfig: Record<string, { icon: typeof Crown; label: string; color: string; bg: string }> = {
+  super_admin: { icon: Crown, label: "Super Admin", color: "text-sun-600", bg: "bg-sun-50" },
+  admin_content: { icon: Shield, label: "Admin Contenu", color: "text-sky-600", bg: "bg-sky-50" },
+  admin_moderation: { icon: Zap, label: "Modérateur", color: "text-matcha-600", bg: "bg-matcha-50" },
+  creator: { icon: Star, label: "Créateur", color: "text-sakura-600", bg: "bg-sakura-50" },
+  organizer: { icon: Star, label: "Organisateur", color: "text-ink-600", bg: "bg-ink-100" },
+  user: { icon: Star, label: "Membre Otaku", color: "text-ink-500", bg: "bg-ink-100" },
+};
 
 export default function DashboardPage() {
   const { profile, session } = useAuth();
@@ -23,6 +38,7 @@ export default function DashboardPage() {
   const [downloadProducts, setDownloadProducts] = useState<Product[]>([]);
   const [activeVideo, setActiveVideo] = useState<Product | null>(null);
   const [loading, setLoading] = useState(true);
+  const [selectedTicket, setSelectedTicket] = useState<Ticket | null>(null);
 
   useEffect(() => {
     if (!session) return;
@@ -62,12 +78,27 @@ export default function DashboardPage() {
   const totalSpent = orders.filter((o) => o.status === "paid").reduce((s, o) => s + Number(o.total), 0);
   const activeTickets = tickets.filter((t) => t.status === "valid");
 
+  const roleKey = profile?.role ?? "user";
+  const badge = roleBadgeConfig[roleKey] ?? roleBadgeConfig.user;
+
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 animate-fade-in">
       <div className="flex items-center justify-between mb-8">
-        <div>
-          <h1 className="font-display font-extrabold text-2xl text-ink-900">Mon espace</h1>
-          <p className="text-ink-500 text-sm mt-1">Bienvenue, {profile?.full_name ?? profile?.username}</p>
+        <div className="flex items-center gap-4">
+          <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-sakura-400 to-sakura-600 flex items-center justify-center text-white font-bold text-xl overflow-hidden">
+            {profile?.avatar_url ? (
+              <img src={profile.avatar_url} alt={profile?.username ?? ""} className="w-full h-full object-cover" />
+            ) : (
+              profile?.username?.[0]?.toUpperCase() ?? "U"
+            )}
+          </div>
+          <div>
+            <h1 className="font-display font-extrabold text-2xl text-ink-900">Mon espace</h1>
+            <p className="text-ink-500 text-sm mt-0.5">Bienvenue, {profile?.full_name ?? profile?.username}</p>
+            <span className={`badge mt-1 ${badge.bg} ${badge.color}`}>
+              <badge.icon className="w-3.5 h-3.5" /> {badge.label}
+            </span>
+          </div>
         </div>
       </div>
 
@@ -165,7 +196,11 @@ export default function DashboardPage() {
           ) : (
             <div className="space-y-3">
               {tickets.map((ticket) => (
-                <div key={ticket.id} className="p-4 rounded-xl bg-ink-50 border border-ink-100">
+                <button
+                  key={ticket.id}
+                  onClick={() => setSelectedTicket(ticket)}
+                  className="w-full text-left p-4 rounded-xl bg-ink-50 border border-ink-100 hover:border-sakura-200 hover:bg-sakura-50/30 transition-all cursor-pointer"
+                >
                   <div className="flex items-start justify-between mb-2">
                     <div>
                       <p className="font-semibold text-sm text-ink-900">{ticket.event?.title ?? "Événement"}</p>
@@ -178,8 +213,9 @@ export default function DashboardPage() {
                   <div className="flex items-center gap-2 mt-2 pt-2 border-t border-ink-100">
                     <QrCode className="w-4 h-4 text-ink-500" />
                     <span className="font-mono text-xs font-bold text-ink-700">{ticket.ticket_code}</span>
+                    <span className="ml-auto text-xs text-sakura-600 font-medium">Voir le billet</span>
                   </div>
-                </div>
+                </button>
               ))}
             </div>
           )}
@@ -249,6 +285,54 @@ export default function DashboardPage() {
               ))}
             </div>
           )}
+        </div>
+      )}
+
+      {/* Ticket QR Code Modal */}
+      {selectedTicket && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-ink-950/60 backdrop-blur-sm animate-fade-in p-4"
+          onClick={() => setSelectedTicket(null)}
+        >
+          <div
+            className="bg-white rounded-3xl shadow-2xl max-w-sm w-full overflow-hidden animate-scale-in"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center justify-between p-5 border-b border-ink-100">
+              <h3 className="font-display font-bold text-lg text-ink-900">Mon billet</h3>
+              <button onClick={() => setSelectedTicket(null)} className="p-2 rounded-lg hover:bg-ink-100">
+                <X className="w-5 h-5 text-ink-500" />
+              </button>
+            </div>
+            <div className="p-6 text-center">
+              <p className="font-display font-bold text-xl text-ink-900 mb-1">{selectedTicket.event?.title ?? "Événement"}</p>
+              <p className="text-sm text-ink-500 mb-4">
+                {selectedTicket.event ? formatDate(selectedTicket.event.event_date, { weekday: "long", day: "numeric", month: "long", year: "numeric" }) : ""}
+              </p>
+              <p className="text-sm text-ink-600 mb-4">{selectedTicket.event?.venue}, {selectedTicket.event?.city}</p>
+
+              <div className="inline-flex p-4 bg-white rounded-2xl border-2 border-ink-100 mb-4">
+                <QRCodeSVG
+                  value={selectedTicket.qr_data}
+                  size={180}
+                  level="M"
+                  includeMargin={false}
+                />
+              </div>
+
+              <div className="bg-ink-50 rounded-xl p-3 mb-4">
+                <p className="text-xs text-ink-400 mb-1">Code unique</p>
+                <p className="font-mono font-bold text-ink-900 text-sm">{selectedTicket.ticket_code}</p>
+              </div>
+
+              <div className="flex items-center justify-center gap-2">
+                <span className={`badge ${selectedTicket.status === "valid" ? "bg-matcha-50 text-matcha-600" : "bg-ink-100 text-ink-500"}`}>
+                  {selectedTicket.status === "valid" ? "Valide" : selectedTicket.status}
+                </span>
+                <span className="text-xs text-ink-400">Acheteur: {profile?.full_name ?? profile?.username}</span>
+              </div>
+            </div>
+          </div>
         </div>
       )}
     </div>

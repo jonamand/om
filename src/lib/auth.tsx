@@ -74,13 +74,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     if (error) return { error: error.message };
 
-    if (data.user) {
-      await supabase.from("profiles").insert({
-        id: data.user.id,
-        username,
-        full_name: fullName,
-        role: "user",
-      });
+    // Profile row is created automatically by the handle_new_user trigger
+    if (data.user && !data.session) {
+      // Email confirmation pending - profile will be created on first sign-in
     }
 
     return { error: null };
