@@ -120,7 +120,7 @@ export default function VideoPlayer({ src, poster, title }: VideoPlayerProps) {
           className="absolute inset-0 flex items-center justify-center bg-ink-950/30 transition-opacity"
           aria-label="Lecture"
         >
-          <span className="w-16 h-16 rounded-full bg-sakura-500/90 flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform">
+          <span className="w-16 h-16 rounded-full bg-sakura-500/150/90 flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform">
             <Play className="w-7 h-7 text-white ml-0.5" fill="currentColor" />
           </span>
         </button>
@@ -180,7 +180,7 @@ export function LockedVideoPlayer({ poster, title, onUnlock, unlockLabel }: { po
         </div>
         <div>
           {title && <p className="text-white font-semibold mb-1">{title}</p>}
-          <p className="text-ink-300 text-sm">Achetez ce tutoriel pour débloquer la vidéo complète</p>
+          <p className="text-white/30 text-sm">Achetez ce tutoriel pour débloquer la vidéo complète</p>
         </div>
         {onUnlock && (
           <button className="btn-primary text-sm" onClick={onUnlock}>

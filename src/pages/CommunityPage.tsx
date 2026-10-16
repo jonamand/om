@@ -25,7 +25,7 @@ export default function CommunityPage() {
       {/* Hero */}
       <section className="relative overflow-hidden bg-ink-950 text-white">
         <div className="absolute inset-0">
-          <div className="absolute top-1/3 -right-20 w-72 h-72 bg-sky-500/20 rounded-full blur-3xl" />
+          <div className="absolute top-1/3 -right-20 w-72 h-72 bg-cyan-500/150/20 rounded-full blur-3xl" />
         </div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="max-w-2xl">
@@ -35,7 +35,7 @@ export default function CommunityPage() {
             <h1 className="font-display font-extrabold text-3xl lg:text-4xl text-white mb-4 text-balance">
               La communauté geek d'Afrique, réunie
             </h1>
-            <p className="text-ink-300 leading-relaxed mb-6">
+            <p className="text-white/30 leading-relaxed mb-6">
               Suivez les actualités, rejoignez nos canaux sociaux et échangez avec des milliers de passionnés
               d'animé, de cosplay, de gaming et de culture pop.
             </p>
@@ -66,7 +66,7 @@ export default function CommunityPage() {
       {/* News */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="flex items-center gap-3 mb-8">
-          <Newspaper className="w-6 h-6 text-sakura-500" />
+          <Newspaper className="w-6 h-6 text-sakura-400" />
           <h2 className="section-title">Actualités & Annonces</h2>
         </div>
 
@@ -85,14 +85,14 @@ export default function CommunityPage() {
           </div>
         ) : articles.length === 0 ? (
           <div className="card p-12 text-center">
-            <Newspaper className="w-12 h-12 text-ink-200 mx-auto mb-3" />
-            <p className="text-ink-500">Aucune actualité pour le moment. Revenez bientôt !</p>
+            <Newspaper className="w-12 h-12 text-white/20 mx-auto mb-3" />
+            <p className="text-white/50">Aucune actualité pour le moment. Revenez bientôt !</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {articles.map((article) => (
               <Link key={article.id} to={`/communaute/${article.slug}`} className="card card-hover overflow-hidden group block">
-                <div className="aspect-[2/1] overflow-hidden bg-ink-100">
+                <div className="aspect-[2/1] overflow-hidden bg-white/5">
                   <img
                     src={article.cover_image}
                     alt={article.title}
@@ -101,12 +101,12 @@ export default function CommunityPage() {
                   />
                 </div>
                 <div className="p-5">
-                  <p className="text-xs text-ink-400 mb-2">{formatDate(article.created_at)}</p>
-                  <h3 className="font-display font-semibold text-lg text-ink-900 mb-2 group-hover:text-sakura-600 transition-colors line-clamp-2">
+                  <p className="text-xs text-white/40 mb-2">{formatDate(article.created_at)}</p>
+                  <h3 className="font-display font-semibold text-lg text-white mb-2 group-hover:text-sakura-300 transition-colors line-clamp-2">
                     {article.title}
                   </h3>
-                  <p className="text-sm text-ink-500 line-clamp-3">{article.excerpt}</p>
-                  <span className="inline-flex items-center gap-1.5 text-sm font-medium text-sakura-600 mt-3 group-hover:gap-2.5 transition-all">
+                  <p className="text-sm text-white/50 line-clamp-3">{article.excerpt}</p>
+                  <span className="inline-flex items-center gap-1.5 text-sm font-medium text-sakura-300 mt-3 group-hover:gap-2.5 transition-all">
                     Lire l'article <ArrowRight className="w-4 h-4" />
                   </span>
                 </div>

@@ -17,18 +17,19 @@ export function ProductCard({ product }: { product: Product }) {
 
   return (
     <div className="card card-hover group flex flex-col overflow-hidden">
-      <Link to={`/boutique/${product.slug}`} className="block relative aspect-[4/3] overflow-hidden bg-ink-100">
+      <Link to={`/boutique/${product.slug}`} className="block relative aspect-[4/3] overflow-hidden bg-ink-400">
         <img
           src={product.image_url}
           alt={product.name}
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
           loading="lazy"
         />
-        <span className="absolute top-3 left-3 badge bg-white/90 backdrop-blur-sm text-ink-700 uppercase">
+        <div className="absolute inset-0 bg-gradient-to-t from-ink-600/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+        <span className="absolute top-3 left-3 badge bg-white/10 backdrop-blur-md text-white/80 border border-white/10 uppercase">
           {product.file_type}
         </span>
         {product.download_count > 200 && (
-          <span className="absolute top-3 right-3 badge bg-sun-400 text-ink-900">
+          <span className="absolute top-3 right-3 badge bg-sun-400/90 text-ink-950">
             <Download className="w-3 h-3" /> Populaire
           </span>
         )}
@@ -37,14 +38,14 @@ export function ProductCard({ product }: { product: Product }) {
       <div className="p-4 flex flex-col flex-1">
         <div className="flex items-center gap-1 mb-2">
           {product.tags.slice(0, 2).map((tag) => (
-            <span key={tag} className="badge bg-sakura-50 text-sakura-600">
+            <span key={tag} className="badge bg-neon-500/15 text-neon-300">
               {tag}
             </span>
           ))}
         </div>
 
         <Link to={`/boutique/${product.slug}`}>
-          <h3 className="font-display font-semibold text-ink-900 line-clamp-2 group-hover:text-sakura-600 transition-colors">
+          <h3 className="font-display font-semibold text-white line-clamp-2 group-hover:text-neon-300 transition-colors">
             {product.name}
           </h3>
         </Link>
@@ -53,19 +54,19 @@ export function ProductCard({ product }: { product: Product }) {
           {avgRating > 0 && (
             <div className="flex items-center gap-1">
               <Star className="w-3.5 h-3.5 fill-sun-400 text-sun-400" />
-              <span className="text-xs font-medium text-ink-600">{avgRating.toFixed(1)}</span>
+              <span className="text-xs font-medium text-white/60">{avgRating.toFixed(1)}</span>
             </div>
           )}
-          <span className="text-xs text-ink-400">{product.download_count} téléchargements</span>
+          <span className="text-xs text-white/40">{product.download_count} téléchargements</span>
         </div>
 
         <div className="mt-auto pt-4 flex items-center justify-between">
-          <span className="font-display font-bold text-lg text-ink-900">
+          <span className="font-display font-bold text-lg text-white">
             {Number(product.price) === 0 ? "Gratuit" : formatPrice(product.price, product.currency)}
           </span>
           {!isAdmin && (
             <button
-              className="p-2.5 rounded-xl bg-sakura-50 text-sakura-600 hover:bg-sakura-500 hover:text-white transition-all"
+              className="p-2.5 rounded-xl bg-neon-500/15 text-neon-300 hover:bg-neon-500 hover:text-white transition-all"
               onClick={(e) => {
                 e.preventDefault();
                 addItem(product);

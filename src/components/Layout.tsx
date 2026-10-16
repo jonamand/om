@@ -5,7 +5,7 @@ import CartDrawer from "./CartDrawer";
 
 export default function Layout() {
   return (
-    <div className="min-h-screen flex flex-col bg-ink-50">
+    <div className="min-h-screen flex flex-col bg-ink-400/50">
       <Navbar />
       <main className="flex-1">
         <Outlet />

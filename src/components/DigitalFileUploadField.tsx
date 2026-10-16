@@ -157,7 +157,7 @@ export default function DigitalFileUploadField({ fileType, value, onChange }: Di
   return (
     <div>
       <div className="flex items-center justify-between mb-2">
-        <label className="text-sm font-semibold text-ink-900">
+        <label className="text-sm font-semibold text-white">
           Fichier numérique — {config.label}
         </label>
         <div className="dfu-mode-toggle">
@@ -195,26 +195,26 @@ export default function DigitalFileUploadField({ fileType, value, onChange }: Di
           />
           {uploading ? (
             <div className="flex flex-col items-center gap-3">
-              <Loader2 className="w-8 h-8 text-sakura-500 animate-spin" />
-              <p className="text-sm font-medium text-ink-700">Téléversement en cours...</p>
+              <Loader2 className="w-8 h-8 text-sakura-400 animate-spin" />
+              <p className="text-sm font-medium text-white/80">Téléversement en cours...</p>
               {progress > 0 && (
-                <div className="w-48 h-1.5 bg-ink-200 rounded-full overflow-hidden">
-                  <div className="h-full bg-sakura-500 rounded-full transition-all" style={{ width: `${progress}%` }} />
+                <div className="w-48 h-1.5 bg-white/10 rounded-full overflow-hidden">
+                  <div className="h-full bg-sakura-500/150 rounded-full transition-all" style={{ width: `${progress}%` }} />
                 </div>
               )}
             </div>
           ) : hasFile ? (
             <div className="flex flex-col items-center gap-3">
-              <div className="dfu-icon bg-matcha-50 text-matcha-600">
+              <div className="dfu-icon bg-matcha-500/15 text-matcha-300">
                 <Check className="w-6 h-6" />
               </div>
               <div>
-                <p className="text-sm font-semibold text-ink-900">Fichier lié</p>
-                <p className="text-xs text-ink-400 mt-0.5 max-w-xs truncate">{value}</p>
+                <p className="text-sm font-semibold text-white">Fichier lié</p>
+                <p className="text-xs text-white/40 mt-0.5 max-w-xs truncate">{value}</p>
               </div>
               <button
                 type="button"
-                className="inline-flex items-center gap-1 text-xs font-medium text-error-600 hover:text-error-700"
+                className="inline-flex items-center gap-1 text-xs font-medium text-error-500 hover:text-error-700"
                 onClick={(e) => { e.stopPropagation(); clearFile(); }}
               >
                 <X className="w-3.5 h-3.5" /> Retirer le fichier
@@ -222,13 +222,13 @@ export default function DigitalFileUploadField({ fileType, value, onChange }: Di
             </div>
           ) : (
             <div className="flex flex-col items-center gap-2">
-              <div className="dfu-icon bg-sakura-50 text-sakura-500">
+              <div className="dfu-icon bg-sakura-500/15 text-sakura-400">
                 <Icon className="w-6 h-6" />
               </div>
-              <p className="text-sm font-semibold text-ink-700">
+              <p className="text-sm font-semibold text-white/80">
                 Cliquez ou glissez votre fichier ici
               </p>
-              <p className="text-xs text-ink-400">
+              <p className="text-xs text-white/40">
                 {config.extensions} — jusqu'à {formatBytes(config.maxSize)}
               </p>
             </div>
@@ -258,14 +258,14 @@ export default function DigitalFileUploadField({ fileType, value, onChange }: Di
               </button>
             )}
           </div>
-          <p className="text-xs text-ink-400">
+          <p className="text-xs text-white/40">
             Collez le lien direct vers le fichier hébergé (CDN, Cloudinary, AWS S3, Google Drive, etc.)
           </p>
         </div>
       )}
 
       {error && (
-        <div className="flex items-start gap-2 mt-2 p-3 rounded-xl bg-error-50 text-error-600 text-sm">
+        <div className="flex items-start gap-2 mt-2 p-3 rounded-xl bg-error-500/15 text-error-500 text-sm">
           <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5" />
           <span>{error}</span>
         </div>
@@ -273,7 +273,7 @@ export default function DigitalFileUploadField({ fileType, value, onChange }: Di
 
       {isVideo && mode === "upload" && (
         <div className="mt-3">
-          <p className="text-xs font-semibold text-ink-500 mb-2">Aperçu vidéo</p>
+          <p className="text-xs font-semibold text-white/50 mb-2">Aperçu vidéo</p>
           <video
             src={value}
             controls

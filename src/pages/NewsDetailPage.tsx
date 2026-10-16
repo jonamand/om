@@ -38,7 +38,7 @@ export default function NewsDetailPage() {
   if (!article) {
     return (
       <div className="max-w-2xl mx-auto px-4 py-20 text-center">
-        <h1 className="font-display font-bold text-2xl text-ink-900 mb-2">Article introuvable</h1>
+        <h1 className="font-display font-bold text-2xl text-white mb-2">Article introuvable</h1>
         <Link to="/communaute" className="btn-primary mt-4">Retour à la communauté</Link>
       </div>
     );
@@ -47,28 +47,28 @@ export default function NewsDetailPage() {
   return (
     <div className="animate-fade-in">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <Link to="/communaute" className="inline-flex items-center gap-2 text-sm text-ink-500 hover:text-ink-900 mb-6 transition-colors">
+        <Link to="/communaute" className="inline-flex items-center gap-2 text-sm text-white/50 hover:text-white mb-6 transition-colors">
           <ArrowLeft className="w-4 h-4" /> Retour à la communauté
         </Link>
 
         <div className="flex items-center gap-3 mb-4">
-          <span className="badge bg-sakura-50 text-sakura-600">News</span>
-          <span className="flex items-center gap-1.5 text-sm text-ink-400">
+          <span className="badge bg-sakura-500/15 text-sakura-300">News</span>
+          <span className="flex items-center gap-1.5 text-sm text-white/40">
             <Calendar className="w-3.5 h-3.5" /> {formatDate(article.created_at)}
           </span>
         </div>
 
-        <h1 className="font-display font-extrabold text-2xl lg:text-3xl text-ink-900 mb-6 text-balance">{article.title}</h1>
+        <h1 className="font-display font-extrabold text-2xl lg:text-3xl text-white mb-6 text-balance">{article.title}</h1>
 
-        <div className="aspect-[2/1] rounded-2xl overflow-hidden bg-ink-100 mb-8 shadow-sm">
+        <div className="aspect-[2/1] rounded-2xl overflow-hidden bg-white/5 mb-8 ">
           <img src={article.cover_image} alt={article.title} className="w-full h-full object-cover" />
         </div>
 
         <div className="prose prose-sm max-w-none">
-          <p className="text-ink-600 leading-relaxed whitespace-pre-line text-base">{article.content}</p>
+          <p className="text-white/60 leading-relaxed whitespace-pre-line text-base">{article.content}</p>
         </div>
 
-        <div className="mt-8 pt-6 border-t border-ink-100 flex items-center justify-between">
+        <div className="mt-8 pt-6 border-t border-white/5 flex items-center justify-between">
           <Link to="/communaute" className="btn-outline text-sm">
             <ArrowLeft className="w-4 h-4" /> Autres actualités
           </Link>

@@ -106,7 +106,7 @@ export default function EventDetailPage() {
   if (!event) {
     return (
       <div className="max-w-2xl mx-auto px-4 py-20 text-center">
-        <h1 className="font-display font-bold text-2xl text-ink-900 mb-2">Événement introuvable</h1>
+        <h1 className="font-display font-bold text-2xl text-white mb-2">Événement introuvable</h1>
         <Link to="/evenements" className="btn-primary mt-4">Retour aux événements</Link>
       </div>
     );
@@ -119,38 +119,38 @@ export default function EventDetailPage() {
   return (
     <div className="animate-fade-in">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <Link to="/evenements" className="inline-flex items-center gap-2 text-sm text-ink-500 hover:text-ink-900 mb-6 transition-colors">
+        <Link to="/evenements" className="inline-flex items-center gap-2 text-sm text-white/50 hover:text-white mb-6 transition-colors">
           <ArrowLeft className="w-4 h-4" /> Retour aux événements
         </Link>
 
         {/* Cover */}
-        <div className="relative aspect-[2/1] rounded-2xl overflow-hidden bg-ink-100 mb-6 shadow-sm">
+        <div className="relative aspect-[2/1] rounded-2xl overflow-hidden bg-white/5 mb-6 ">
           <img src={event.cover_image} alt={event.title} className="w-full h-full object-cover" />
           <div className="absolute top-4 left-4 flex gap-2">
-            <span className="badge bg-white/90 backdrop-blur-sm text-ink-700">
+            <span className="badge bg-white/90 backdrop-blur-sm text-white/80">
               {eventTypeLabels[event.event_type]}
             </span>
-            {event.is_free && <span className="badge bg-matcha-500 text-white">Gratuit</span>}
+            {event.is_free && <span className="badge bg-matcha-500/150 text-white">Gratuit</span>}
           </div>
         </div>
 
         {/* Title */}
-        <h1 className="font-display font-extrabold text-2xl lg:text-3xl text-ink-900 mb-4">{event.title}</h1>
+        <h1 className="font-display font-extrabold text-2xl lg:text-3xl text-white mb-4">{event.title}</h1>
 
         {/* Meta */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
           <div className="card p-4 flex items-center gap-3">
-            <Calendar className="w-5 h-5 text-sakura-500 flex-shrink-0" />
+            <Calendar className="w-5 h-5 text-sakura-400 flex-shrink-0" />
             <div>
-              <p className="text-xs text-ink-400">Date</p>
-              <p className="font-semibold text-ink-900 text-sm">{formatDate(event.event_date, { weekday: "long", day: "numeric", month: "long", year: "numeric" })}</p>
+              <p className="text-xs text-white/40">Date</p>
+              <p className="font-semibold text-white text-sm">{formatDate(event.event_date, { weekday: "long", day: "numeric", month: "long", year: "numeric" })}</p>
             </div>
           </div>
           <div className="card p-4 flex items-center gap-3">
-            <Clock className="w-5 h-5 text-sakura-500 flex-shrink-0" />
+            <Clock className="w-5 h-5 text-sakura-400 flex-shrink-0" />
             <div>
-              <p className="text-xs text-ink-400">Heure</p>
-              <p className="font-semibold text-ink-900 text-sm">
+              <p className="text-xs text-white/40">Heure</p>
+              <p className="font-semibold text-white text-sm">
                 {new Date(event.event_date).toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" })}
                 {event.end_date && ` — ${new Date(event.end_date).toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" })}`}
               </p>
@@ -159,63 +159,63 @@ export default function EventDetailPage() {
           <div className="card p-4 flex items-center gap-3">
             <MapPin className="w-5 h-5 text-sky-500 flex-shrink-0" />
             <div>
-              <p className="text-xs text-ink-400">Lieu</p>
-              <p className="font-semibold text-ink-900 text-sm">{event.venue}, {event.city}, {event.country}</p>
+              <p className="text-xs text-white/40">Lieu</p>
+              <p className="font-semibold text-white text-sm">{event.venue}, {event.city}, {event.country}</p>
             </div>
           </div>
           <div className="card p-4 flex items-center gap-3">
             <Users className="w-5 h-5 text-matcha-500 flex-shrink-0" />
             <div>
-              <p className="text-xs text-ink-400">Capacité</p>
-              <p className="font-semibold text-ink-900 text-sm">{event.registered_count} / {event.capacity} inscrits</p>
+              <p className="text-xs text-white/40">Capacité</p>
+              <p className="font-semibold text-white text-sm">{event.registered_count} / {event.capacity} inscrits</p>
             </div>
           </div>
         </div>
 
         {/* Description */}
         <div className="prose prose-sm max-w-none mb-8">
-          <h2 className="font-display font-bold text-lg text-ink-900 mb-3">À propos de cet événement</h2>
-          <p className="text-ink-600 leading-relaxed whitespace-pre-line">{event.description}</p>
+          <h2 className="font-display font-bold text-lg text-white mb-3">À propos de cet événement</h2>
+          <p className="text-white/60 leading-relaxed whitespace-pre-line">{event.description}</p>
         </div>
 
         {/* Registration */}
         <div className="card p-6 sticky bottom-4 shadow-lg">
           {registered ? (
             <div className="text-center animate-scale-in">
-              <div className="w-16 h-16 rounded-2xl bg-matcha-50 flex items-center justify-center mx-auto mb-4">
-                <Check className="w-8 h-8 text-matcha-600" />
+              <div className="w-16 h-16 rounded-2xl bg-matcha-500/15 flex items-center justify-center mx-auto mb-4">
+                <Check className="w-8 h-8 text-matcha-300" />
               </div>
-              <h3 className="font-display font-bold text-lg text-ink-900 mb-1">Inscription confirmée !</h3>
-              <p className="text-sm text-ink-500 mb-4">Votre billet a été généré. Retrouvez-le dans « Mes achats ».</p>
-              <div className="bg-ink-50 rounded-xl p-4 mb-4">
+              <h3 className="font-display font-bold text-lg text-white mb-1">Inscription confirmée !</h3>
+              <p className="text-sm text-white/50 mb-4">Votre billet a été généré. Retrouvez-le dans « Mes achats ».</p>
+              <div className="bg-ink-400/50 rounded-xl p-4 mb-4">
                 <div className="flex items-center justify-center gap-2 mb-2">
-                  <QrCode className="w-5 h-5 text-ink-600" />
-                  <span className="font-mono font-bold text-ink-900">{ticketCode}</span>
+                  <QrCode className="w-5 h-5 text-white/60" />
+                  <span className="font-mono font-bold text-white">{ticketCode}</span>
                 </div>
-                <p className="text-xs text-ink-400">Code unique à présenter le jour J</p>
+                <p className="text-xs text-white/40">Code unique à présenter le jour J</p>
               </div>
               <Link to="/mon-espace" className="btn-primary w-full">Voir mes billets</Link>
             </div>
           ) : isPast ? (
             <div className="text-center">
-              <p className="text-ink-500 mb-3">Cet événement est passé.</p>
+              <p className="text-white/50 mb-3">Cet événement est passé.</p>
             </div>
           ) : isFull ? (
             <div className="text-center">
-              <p className="text-error-600 font-semibold mb-3">Désolé, cet événement est complet.</p>
+              <p className="text-error-500 font-semibold mb-3">Désolé, cet événement est complet.</p>
             </div>
           ) : (
             <>
               <div className="flex items-center justify-between mb-4">
                 <div>
-                  <p className="text-sm text-ink-500">Prix</p>
-                  <p className="font-display font-extrabold text-2xl text-ink-900">
+                  <p className="text-sm text-white/50">Prix</p>
+                  <p className="font-display font-extrabold text-2xl text-white">
                     {event.is_free ? "Gratuit" : formatPrice(event.price, event.currency)}
                   </p>
                 </div>
                 <div className="text-right">
-                  <p className="text-sm text-ink-500">Places restantes</p>
-                  <p className="font-display font-bold text-xl text-matcha-600">{spotsLeft}</p>
+                  <p className="text-sm text-white/50">Places restantes</p>
+                  <p className="font-display font-bold text-xl text-matcha-300">{spotsLeft}</p>
                 </div>
               </div>
               <button className="btn-primary w-full text-base py-3" onClick={handleRegister} disabled={registering}>
@@ -228,7 +228,7 @@ export default function EventDetailPage() {
                 )}
               </button>
               {!session && (
-                <p className="text-xs text-ink-400 text-center mt-3">Connexion requise pour s'inscrire</p>
+                <p className="text-xs text-white/40 text-center mt-3">Connexion requise pour s'inscrire</p>
               )}
             </>
           )}

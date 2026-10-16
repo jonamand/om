@@ -73,10 +73,10 @@ export default function EventsPage() {
 
   return (
     <div className="animate-fade-in">
-      <div className="bg-white border-b border-ink-100">
+      <div className="bg-white/5 border-b border-white/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <h1 className="font-display font-extrabold text-3xl text-ink-900 mb-2">Événements</h1>
-          <p className="text-ink-500">
+          <h1 className="font-display font-extrabold text-3xl text-white mb-2">Événements</h1>
+          <p className="text-white/50">
             Conventions, concours cosplay, tournois e-sport et ateliers à travers l'Afrique de l'Ouest.
           </p>
         </div>
@@ -84,7 +84,7 @@ export default function EventsPage() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <form onSubmit={(e) => { e.preventDefault(); updateParam("q", searchInput); }} className="relative mb-4">
-          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-5 h-5 text-ink-400" />
+          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-5 h-5 text-white/40" />
           <input
             type="text"
             placeholder="Rechercher un événement..."
@@ -96,7 +96,7 @@ export default function EventsPage() {
 
         <div className="flex flex-wrap items-center gap-2 mb-3">
           <button
-            className={`px-4 py-2 rounded-xl font-medium text-sm transition-all ${!selectedType ? "bg-ink-900 text-white" : "bg-white border border-ink-200 text-ink-600 hover:border-ink-300"}`}
+            className={`px-4 py-2 rounded-xl font-medium text-sm transition-all ${!selectedType ? "bg-ink-900 text-white" : "bg-white/5 border border-white/10 text-white/60 hover:border-white/15"}`}
             onClick={() => updateParam("type", "")}
           >
             Tous les types
@@ -104,7 +104,7 @@ export default function EventsPage() {
           {eventTypes.map((t) => (
             <button
               key={t.slug}
-              className={`px-4 py-2 rounded-xl font-medium text-sm transition-all ${selectedType === t.slug ? "bg-ink-900 text-white" : "bg-white border border-ink-200 text-ink-600 hover:border-ink-300"}`}
+              className={`px-4 py-2 rounded-xl font-medium text-sm transition-all ${selectedType === t.slug ? "bg-ink-900 text-white" : "bg-white/5 border border-white/10 text-white/60 hover:border-white/15"}`}
               onClick={() => updateParam("type", t.slug)}
             >
               {t.label}
@@ -114,7 +114,7 @@ export default function EventsPage() {
 
         <div className="flex flex-wrap items-center gap-2 mb-6">
           <button
-            className={`px-4 py-2 rounded-xl font-medium text-sm transition-all ${!selectedCity ? "bg-sky-500 text-white" : "bg-white border border-ink-200 text-ink-600 hover:border-ink-300"}`}
+            className={`px-4 py-2 rounded-xl font-medium text-sm transition-all ${!selectedCity ? "bg-cyan-500/150 text-white" : "bg-white/5 border border-white/10 text-white/60 hover:border-white/15"}`}
             onClick={() => updateParam("ville", "")}
           >
             Toutes les villes
@@ -122,20 +122,20 @@ export default function EventsPage() {
           {cities.map((c) => (
             <button
               key={c}
-              className={`flex items-center gap-1.5 px-4 py-2 rounded-xl font-medium text-sm transition-all ${selectedCity === c ? "bg-sky-500 text-white" : "bg-white border border-ink-200 text-ink-600 hover:border-ink-300"}`}
+              className={`flex items-center gap-1.5 px-4 py-2 rounded-xl font-medium text-sm transition-all ${selectedCity === c ? "bg-cyan-500/150 text-white" : "bg-white/5 border border-white/10 text-white/60 hover:border-white/15"}`}
               onClick={() => updateParam("ville", c)}
             >
               <MapPin className="w-3.5 h-3.5" /> {c}
             </button>
           ))}
           {hasFilters && (
-            <button className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-sm text-error-600 hover:bg-error-50 ml-auto" onClick={clearFilters}>
+            <button className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-sm text-error-500 hover:bg-error-500/150/15 ml-auto" onClick={clearFilters}>
               <X className="w-3.5 h-3.5" /> Effacer
             </button>
           )}
         </div>
 
-        <p className="text-sm text-ink-500 mb-4">
+        <p className="text-sm text-white/50 mb-4">
           {loading ? "Chargement..." : `${filteredEvents.length} événement${filteredEvents.length > 1 ? "s" : ""} à venir`}
         </p>
 
@@ -145,11 +145,11 @@ export default function EventsPage() {
           </div>
         ) : filteredEvents.length === 0 ? (
           <div className="card p-12 text-center">
-            <div className="w-16 h-16 rounded-2xl bg-ink-100 flex items-center justify-center mx-auto mb-4">
-              <Search className="w-8 h-8 text-ink-300" />
+            <div className="w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center mx-auto mb-4">
+              <Search className="w-8 h-8 text-white/30" />
             </div>
-            <h3 className="font-display font-semibold text-lg text-ink-900 mb-2">Aucun événement trouvé</h3>
-            <p className="text-ink-500 mb-4">Essayez d'élargir vos critères de recherche.</p>
+            <h3 className="font-display font-semibold text-lg text-white mb-2">Aucun événement trouvé</h3>
+            <p className="text-white/50 mb-4">Essayez d'élargir vos critères de recherche.</p>
             <button className="btn-outline" onClick={clearFilters}>Réinitialiser</button>
           </div>
         ) : (
