@@ -71,7 +71,7 @@ export default function HomePage() {
           <div className="max-w-3xl">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 backdrop-blur-md border border-white/10 text-sm font-medium mb-6 animate-slide-down">
               <Sparkles className="w-4 h-4 text-neon-400" />
-              <span className="text-white/80">La plateforme geek #1 d'Afrique de l'Ouest</span>
+              <span className="text-ink-700">La plateforme geek #1 d'Afrique de l'Ouest</span>
             </div>
 
             <h1 className="font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl leading-[1.1] tracking-tight text-balance animate-slide-up">
@@ -80,7 +80,7 @@ export default function HomePage() {
               <span className="text-white">d'Afrique</span>
             </h1>
 
-            <p className="mt-6 text-lg text-white/60 max-w-2xl leading-relaxed animate-slide-up" style={{ animationDelay: "0.1s" }}>
+            <p className="mt-6 text-lg text-ink-600 max-w-2xl leading-relaxed animate-slide-up" style={{ animationDelay: "0.1s" }}>
               Templates cosplay, fichiers 3D, tutoriels vidéo, conventions, concours et tournois e-sport.
               Tout l'écosystème geek réuni sur une seule plateforme, pensée pour le mobile et les paiements locaux.
             </p>
@@ -99,15 +99,15 @@ export default function HomePage() {
             <div className="mt-12 grid grid-cols-3 gap-6 max-w-lg animate-slide-up" style={{ animationDelay: "0.3s" }}>
               <div>
                 <p className="text-3xl font-display font-bold text-transparent bg-clip-text bg-gradient-to-r from-neon-400 to-sakura-400">500K+</p>
-                <p className="text-sm text-white/40">Fans potentiels</p>
+                <p className="text-sm text-ink-400">Fans potentiels</p>
               </div>
               <div>
                 <p className="text-3xl font-display font-bold text-transparent bg-clip-text bg-gradient-to-r from-sakura-400 to-cyan-400">6</p>
-                <p className="text-sm text-white/40">Pays visés</p>
+                <p className="text-sm text-ink-400">Pays visés</p>
               </div>
               <div>
                 <p className="text-3xl font-display font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-neon-400">100+</p>
-                <p className="text-sm text-white/40">Produits au lancement</p>
+                <p className="text-sm text-ink-400">Produits au lancement</p>
               </div>
             </div>
           </div>
@@ -124,7 +124,7 @@ export default function HomePage() {
               </div>
               <div>
                 <h3 className="font-semibold text-white">Optimisé 3G</h3>
-                <p className="text-sm text-white/50">Chargement rapide même sur connexion lente</p>
+                <p className="text-sm text-ink-500">Chargement rapide même sur connexion lente</p>
               </div>
             </div>
             <div className="flex items-center gap-4">
@@ -133,7 +133,7 @@ export default function HomePage() {
               </div>
               <div>
                 <h3 className="font-semibold text-white">Paiements sécurisés</h3>
-                <p className="text-sm text-white/50">Mobile Money, Wave, Orange, cartes bancaires</p>
+                <p className="text-sm text-ink-500">Mobile Money, Wave, Orange, cartes bancaires</p>
               </div>
             </div>
             <div className="flex items-center gap-4">
@@ -142,7 +142,7 @@ export default function HomePage() {
               </div>
               <div>
                 <h3 className="font-semibold text-white">Conçu pour l'Afrique</h3>
-                <p className="text-sm text-white/50">Interface en français, mobile-first</p>
+                <p className="text-sm text-ink-500">Interface en français, mobile-first</p>
               </div>
             </div>
           </div>
@@ -169,7 +169,7 @@ export default function HomePage() {
       </section>
 
       {/* Upcoming Events */}
-      <section className="bg-ink-500/30 py-16 border-y border-white/5">
+      <section className="bg-night-500/30 py-16 border-y border-white/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-end justify-between mb-8">
             <div>
@@ -200,10 +200,10 @@ export default function HomePage() {
               </div>
               <div>
                 <h2 className="font-display font-bold text-xl text-white">Rejoignez la communauté</h2>
-                <p className="text-sm text-white/40">Plus de 500 000 fans vous attendent</p>
+                <p className="text-sm text-ink-400">Plus de 500 000 fans vous attendent</p>
               </div>
             </div>
-            <p className="text-white/60 mb-6 leading-relaxed">
+            <p className="text-ink-600 mb-6 leading-relaxed">
               Connectez-vous avec la communauté geek et otaku d'Afrique de l'Ouest. Partagez vos créations,
               participez aux événements et échangez avec des milliers de passionnés.
             </p>
@@ -247,10 +247,10 @@ export default function HomePage() {
                 >
                   <div className="flex items-center gap-2 mb-2">
                     <span className="badge bg-sakura-500/150/15 text-sakura-300">News</span>
-                    <span className="text-xs text-white/40">{formatDate(article.created_at)}</span>
+                    <span className="text-xs text-ink-400">{formatDate(article.created_at)}</span>
                   </div>
                   <h3 className="font-display font-semibold text-white mb-1 line-clamp-2">{article.title}</h3>
-                  <p className="text-sm text-white/50 line-clamp-2">{article.excerpt}</p>
+                  <p className="text-sm text-ink-500 line-clamp-2">{article.excerpt}</p>
                 </Link>
               ))
             )}
@@ -265,7 +265,7 @@ export default function HomePage() {
           <h2 className="font-display font-extrabold text-3xl lg:text-4xl text-white mb-4 text-balance neon-text">
             Prêt à rejoindre l'aventure otaku ?
           </h2>
-          <p className="text-white/80 text-lg mb-8 max-w-2xl mx-auto">
+          <p className="text-ink-700 text-lg mb-8 max-w-2xl mx-auto">
             Créez votre compte gratuitement et accédez à des centaines de produits, événements et à toute la communauté.
           </p>
           <Link to="/inscription" className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-white/5 text-neon-600 font-bold hover:bg-white/90 transition-all shadow-2xl hover:shadow-neon-500/30 text-base">

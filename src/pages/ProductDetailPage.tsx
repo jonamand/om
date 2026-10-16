@@ -123,7 +123,7 @@ export default function ProductDetailPage() {
     return (
       <div className="max-w-2xl mx-auto px-4 py-20 text-center">
         <h1 className="font-display font-bold text-2xl text-white mb-2">Produit introuvable</h1>
-        <p className="text-white/50 mb-6">Ce produit n'existe pas ou n'est plus disponible.</p>
+        <p className="text-ink-500 mb-6">Ce produit n'existe pas ou n'est plus disponible.</p>
         <Link to="/boutique" className="btn-primary">Retour à la boutique</Link>
       </div>
     );
@@ -134,7 +134,7 @@ export default function ProductDetailPage() {
   return (
     <div className="animate-fade-in">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <Link to="/boutique" className="inline-flex items-center gap-2 text-sm text-white/50 hover:text-white mb-6 transition-colors">
+        <Link to="/boutique" className="inline-flex items-center gap-2 text-sm text-ink-500 hover:text-white mb-6 transition-colors">
           <ArrowLeft className="w-4 h-4" /> Retour à la boutique
         </Link>
 
@@ -154,7 +154,7 @@ export default function ProductDetailPage() {
           ) : (
             <div className="relative aspect-square rounded-2xl overflow-hidden bg-white/5 ">
               <img src={product.image_url} alt={product.name} className="w-full h-full object-cover" />
-              <span className="absolute top-4 left-4 badge bg-white/90 backdrop-blur-sm text-white/80 uppercase">
+              <span className="absolute top-4 left-4 badge bg-white/90 backdrop-blur-sm text-ink-700 uppercase">
                 {isVideo ? <Video className="w-3 h-3" /> : <FileText className="w-3 h-3" />} {product.file_type}
               </span>
             </div>
@@ -178,27 +178,27 @@ export default function ProductDetailPage() {
                   {Array.from({ length: 5 }).map((_, i) => (
                     <Star
                       key={i}
-                      className={`w-4 h-4 ${i < Math.round(avgRating) ? "fill-sun-400 text-sun-400" : "text-white/20"}`}
+                      className={`w-4 h-4 ${i < Math.round(avgRating) ? "fill-sun-400 text-sun-400" : "text-ink-200"}`}
                     />
                   ))}
                 </div>
-                <span className="text-sm text-white/50">
+                <span className="text-sm text-ink-500">
                   {reviews.length > 0 ? `${avgRating.toFixed(1)} (${reviews.length} avis)` : "Pas encore d'avis"}
                 </span>
               </div>
-              <span className="text-sm text-white/40">·</span>
-              <span className="text-sm text-white/50">{product.download_count} téléchargements</span>
+              <span className="text-sm text-ink-400">·</span>
+              <span className="text-sm text-ink-500">{product.download_count} téléchargements</span>
             </div>
 
             <p className="font-display font-extrabold text-3xl text-white mb-6">
               {Number(product.price) === 0 ? "Gratuit" : formatPrice(product.price, product.currency)}
             </p>
 
-            <p className="text-white/60 leading-relaxed mb-6">{product.description}</p>
+            <p className="text-ink-600 leading-relaxed mb-6">{product.description}</p>
 
-            <div className="card p-4 bg-ink-400/50 border-white/5 mb-6">
+            <div className="card p-4 bg-night-400/50 border-white/5 mb-6">
               <h3 className="font-semibold text-sm text-white mb-3">Ce que vous obtenez</h3>
-              <ul className="space-y-2 text-sm text-white/60">
+              <ul className="space-y-2 text-sm text-ink-600">
                 {isVideo && hasFileUrl ? (
                   <li className="flex items-center gap-2"><Check className="w-4 h-4 text-matcha-500" /> Vidéo tutoriel HD en streaming après achat</li>
                 ) : (
@@ -210,8 +210,8 @@ export default function ProductDetailPage() {
             </div>
 
             {isAdmin ? (
-              <div className="card p-4 bg-ink-400/50 border-white/5 mt-auto">
-                <p className="text-sm text-white/50 text-center">Les administrateurs ne peuvent pas passer de commandes.</p>
+              <div className="card p-4 bg-night-400/50 border-white/5 mt-auto">
+                <p className="text-sm text-ink-500 text-center">Les administrateurs ne peuvent pas passer de commandes.</p>
               </div>
             ) : (
               <div className="space-y-3 mt-auto">
@@ -276,10 +276,10 @@ export default function ProductDetailPage() {
                     onClick={() => setReviewRating(i + 1)}
                     className="p-1 transition-transform hover:scale-110"
                   >
-                    <Star className={`w-7 h-7 ${(reviewHover || reviewRating) > i ? "fill-sun-400 text-sun-400" : "text-white/20"}`} />
+                    <Star className={`w-7 h-7 ${(reviewHover || reviewRating) > i ? "fill-sun-400 text-sun-400" : "text-ink-200"}`} />
                   </button>
                 ))}
-                <span className="ml-2 text-sm text-white/50">
+                <span className="ml-2 text-sm text-ink-500">
                   {reviewRating > 0 ? `${reviewRating} étoile${reviewRating > 1 ? "s" : ""}` : "Cliquez pour noter"}
                 </span>
               </div>
@@ -300,7 +300,7 @@ export default function ProductDetailPage() {
             </div>
           ) : (
             <div className="card p-6 mb-6 text-center">
-              <p className="text-sm text-white/50">
+              <p className="text-sm text-ink-500">
                 <Link to="/connexion" className="text-sakura-300 font-medium">Connectez-vous</Link> pour laisser un avis.
               </p>
             </div>
@@ -308,8 +308,8 @@ export default function ProductDetailPage() {
 
           {reviews.length === 0 ? (
             <div className="card p-8 text-center">
-              <Star className="w-10 h-10 text-white/20 mx-auto mb-3" />
-              <p className="text-white/50">Aucun avis pour le moment. Soyez le premier à donner votre avis !</p>
+              <Star className="w-10 h-10 text-ink-200 mx-auto mb-3" />
+              <p className="text-ink-500">Aucun avis pour le moment. Soyez le premier à donner votre avis !</p>
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -322,16 +322,16 @@ export default function ProductDetailPage() {
                       </div>
                       <div>
                         <p className="font-medium text-white text-sm">{review.profile?.username ?? "Utilisateur"}</p>
-                        <p className="text-xs text-white/40">{timeAgo(review.created_at)}</p>
+                        <p className="text-xs text-ink-400">{timeAgo(review.created_at)}</p>
                       </div>
                     </div>
                     <div className="flex">
                       {Array.from({ length: 5 }).map((_, i) => (
-                        <Star key={i} className={`w-3.5 h-3.5 ${i < review.rating ? "fill-sun-400 text-sun-400" : "text-white/20"}`} />
+                        <Star key={i} className={`w-3.5 h-3.5 ${i < review.rating ? "fill-sun-400 text-sun-400" : "text-ink-200"}`} />
                       ))}
                     </div>
                   </div>
-                  {review.comment && <p className="text-sm text-white/60 leading-relaxed">{review.comment}</p>}
+                  {review.comment && <p className="text-sm text-ink-600 leading-relaxed">{review.comment}</p>}
                 </div>
               ))}
             </div>

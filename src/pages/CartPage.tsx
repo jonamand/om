@@ -10,10 +10,10 @@ export default function CartPage() {
     return (
       <div className="max-w-2xl mx-auto px-4 py-20 text-center animate-fade-in">
         <div className="w-20 h-20 rounded-2xl bg-white/5 flex items-center justify-center mx-auto mb-4">
-          <ShoppingBag className="w-10 h-10 text-white/30" />
+          <ShoppingBag className="w-10 h-10 text-ink-300" />
         </div>
         <h1 className="font-display font-bold text-2xl text-white mb-2">Votre panier est vide</h1>
-        <p className="text-white/50 mb-6">Découvrez nos templates cosplay, fichiers 3D et tutoriels.</p>
+        <p className="text-ink-500 mb-6">Découvrez nos templates cosplay, fichiers 3D et tutoriels.</p>
         <Link to="/boutique" className="btn-primary">Explorer la boutique</Link>
       </div>
     );
@@ -23,7 +23,7 @@ export default function CartPage() {
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 animate-fade-in">
       <div className="flex items-center justify-between mb-6">
         <h1 className="font-display font-extrabold text-2xl text-white">Mon panier ({count})</h1>
-        <button className="text-sm text-white/50 hover:text-error-500 transition-colors" onClick={clear}>
+        <button className="text-sm text-ink-500 hover:text-error-500 transition-colors" onClick={clear}>
           Vider le panier
         </button>
       </div>
@@ -38,7 +38,7 @@ export default function CartPage() {
               <Link to={`/boutique/${item.product.slug}`} className="font-medium text-white hover:text-sakura-300 line-clamp-2">
                 {item.product.name}
               </Link>
-              <p className="text-sm text-white/40 mt-0.5">{item.product.file_type.toUpperCase()} · {item.product.tags[0]}</p>
+              <p className="text-sm text-ink-400 mt-0.5">{item.product.file_type.toUpperCase()} · {item.product.tags[0]}</p>
               <div className="flex items-center gap-3 mt-3">
                 <div className="flex items-center gap-1">
                   <button className="w-8 h-8 rounded-lg border border-white/10 flex items-center justify-center hover:bg-white/5" onClick={() => updateQuantity(item.product.id, item.quantity - 1)}>
@@ -49,14 +49,14 @@ export default function CartPage() {
                     <Plus className="w-3.5 h-3.5" />
                   </button>
                 </div>
-                <button className="text-white/40 hover:text-error-500 transition-colors" onClick={() => removeItem(item.product.id)}>
+                <button className="text-ink-400 hover:text-error-500 transition-colors" onClick={() => removeItem(item.product.id)}>
                   <Trash2 className="w-4 h-4" />
                 </button>
               </div>
             </div>
             <div className="text-right">
               <p className="font-display font-bold text-lg text-white">{Number(item.product.price) === 0 ? "Gratuit" : formatPrice(item.product.price * item.quantity, item.product.currency)}</p>
-              <p className="text-xs text-white/40">{Number(item.product.price) === 0 ? "Gratuit" : formatPrice(item.product.price, item.product.currency)} / unité</p>
+              <p className="text-xs text-ink-400">{Number(item.product.price) === 0 ? "Gratuit" : formatPrice(item.product.price, item.product.currency)} / unité</p>
             </div>
           </div>
         ))}
@@ -64,11 +64,11 @@ export default function CartPage() {
 
       <div className="card p-5">
         <div className="flex items-center justify-between mb-2">
-          <span className="text-white/60">Sous-total</span>
+          <span className="text-ink-600">Sous-total</span>
           <span className="font-medium">{formatPrice(total)}</span>
         </div>
         <div className="flex items-center justify-between mb-4">
-          <span className="text-white/60">Frais de livraison</span>
+          <span className="text-ink-600">Frais de livraison</span>
           <span className="font-medium text-matcha-300">Numérique — gratuit</span>
         </div>
         <div className="flex items-center justify-between pt-4 border-t border-white/5">

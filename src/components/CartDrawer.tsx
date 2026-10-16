@@ -9,7 +9,7 @@ export default function CartDrawer() {
   return (
     <>
       <div
-        className={`fixed inset-0 bg-ink-950/40 backdrop-blur-sm z-50 transition-opacity duration-300 ${
+        className={`fixed inset-0 bg-night-950/40 backdrop-blur-sm z-50 transition-opacity duration-300 ${
           isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
         }`}
         onClick={() => setOpen(false)}
@@ -28,16 +28,16 @@ export default function CartDrawer() {
             className="p-2 hover:bg-white/5 rounded-xl transition-colors"
             onClick={() => setOpen(false)}
           >
-            <X className="w-5 h-5 text-white/60" />
+            <X className="w-5 h-5 text-ink-600" />
           </button>
         </div>
 
         {items.length === 0 ? (
           <div className="flex-1 flex flex-col items-center justify-center gap-4 p-8">
             <div className="w-20 h-20 rounded-2xl bg-white/5 flex items-center justify-center">
-              <ShoppingBag className="w-10 h-10 text-white/30" />
+              <ShoppingBag className="w-10 h-10 text-ink-300" />
             </div>
-            <p className="text-white/50 text-center">Votre panier est vide</p>
+            <p className="text-ink-500 text-center">Votre panier est vide</p>
             <Link to="/boutique" className="btn-primary" onClick={() => setOpen(false)}>
               Découvrir la boutique
             </Link>
@@ -85,7 +85,7 @@ export default function CartDrawer() {
                         <Plus className="w-3 h-3" />
                       </button>
                       <button
-                        className="ml-auto p-1.5 text-white/40 hover:text-error-500"
+                        className="ml-auto p-1.5 text-ink-400 hover:text-error-500"
                         onClick={() => removeItem(item.product.id)}
                       >
                         <Trash2 className="w-4 h-4" />
@@ -98,7 +98,7 @@ export default function CartDrawer() {
 
             <div className="border-t border-white/5 p-5 space-y-4">
               <div className="flex items-center justify-between">
-                <span className="text-white/60 font-medium">Total</span>
+                <span className="text-ink-600 font-medium">Total</span>
                 <span className="font-display font-bold text-xl text-white">
                   {formatPrice(total)}
                 </span>

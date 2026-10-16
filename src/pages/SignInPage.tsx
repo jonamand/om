@@ -32,7 +32,7 @@ export default function SignInPage() {
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
           <Link to="/" className="inline-flex items-center gap-2 mb-6">
-            <div className="w-10 h-10 rounded-xl bg-ink-900 flex items-center justify-center">
+            <div className="w-10 h-10 rounded-xl bg-night-900 flex items-center justify-center">
               <Sparkles className="w-5 h-5 text-sakura-400" />
             </div>
             <span className="font-display font-extrabold text-xl text-white">
@@ -40,7 +40,7 @@ export default function SignInPage() {
             </span>
           </Link>
           <h1 className="font-display font-extrabold text-2xl text-white mb-2">Connexion</h1>
-          <p className="text-white/50">Connectez-vous pour accéder à vos achats et événements</p>
+          <p className="text-ink-500">Connectez-vous pour accéder à vos achats et événements</p>
         </div>
 
         <div className="card p-6">
@@ -52,9 +52,9 @@ export default function SignInPage() {
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-white/80 mb-1.5">Email</label>
+              <label className="block text-sm font-medium text-ink-700 mb-1.5">Email</label>
               <div className="relative">
-                <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-5 h-5 text-white/40" />
+                <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-5 h-5 text-ink-400" />
                 <input
                   type="email"
                   required
@@ -67,9 +67,9 @@ export default function SignInPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-white/80 mb-1.5">Mot de passe</label>
+              <label className="block text-sm font-medium text-ink-700 mb-1.5">Mot de passe</label>
               <div className="relative">
-                <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 w-5 h-5 text-white/40" />
+                <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 w-5 h-5 text-ink-400" />
                 <input
                   type="password"
                   required
@@ -86,7 +86,7 @@ export default function SignInPage() {
             </button>
           </form>
 
-          <p className="text-center text-sm text-white/50 mt-4">
+          <p className="text-center text-sm text-ink-500 mt-4">
             Pas encore de compte ?{" "}
             <Link to="/inscription" className="text-sakura-300 font-medium hover:text-sakura-700">
               Créer un compte

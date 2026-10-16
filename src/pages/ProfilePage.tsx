@@ -8,8 +8,8 @@ const roleBadgeConfig: Record<string, { icon: typeof Crown; label: string; color
   admin_content: { icon: Shield, label: "Admin Contenu", color: "text-cyan-300", bg: "bg-cyan-500/15" },
   admin_moderation: { icon: Zap, label: "Modérateur", color: "text-matcha-300", bg: "bg-matcha-500/15" },
   creator: { icon: Star, label: "Créateur", color: "text-sakura-300", bg: "bg-sakura-500/15" },
-  organizer: { icon: Star, label: "Organisateur", color: "text-white/60", bg: "bg-white/5" },
-  user: { icon: Star, label: "Membre Otaku", color: "text-white/50", bg: "bg-white/5" },
+  organizer: { icon: Star, label: "Organisateur", color: "text-ink-600", bg: "bg-white/5" },
+  user: { icon: Star, label: "Membre Otaku", color: "text-ink-500", bg: "bg-white/5" },
 };
 
 export default function ProfilePage() {
@@ -95,11 +95,11 @@ export default function ProfilePage() {
                 profile?.username?.[0]?.toUpperCase() ?? "U"
               )}
             </button>
-            <div className="absolute inset-0 rounded-2xl bg-ink-950/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+            <div className="absolute inset-0 rounded-2xl bg-night-950/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
               <Camera className="w-6 h-6 text-white" />
             </div>
             {uploadingAvatar && (
-              <div className="absolute inset-0 rounded-2xl bg-ink-950/50 flex items-center justify-center">
+              <div className="absolute inset-0 rounded-2xl bg-night-950/50 flex items-center justify-center">
                 <Loader2 className="w-6 h-6 text-white animate-spin" />
               </div>
             )}
@@ -113,13 +113,13 @@ export default function ProfilePage() {
           </div>
           <div>
             <p className="font-display font-bold text-lg text-white">{profile?.full_name}</p>
-            <p className="text-sm text-white/50">@{profile?.username}</p>
+            <p className="text-sm text-ink-500">@{profile?.username}</p>
             <span className={`badge mt-1.5 ${badge.bg} ${badge.color}`}>
               <badge.icon className="w-3.5 h-3.5" /> {badge.label}
             </span>
           </div>
         </div>
-        <p className="text-xs text-white/40 mt-3 flex items-center gap-1.5">
+        <p className="text-xs text-ink-400 mt-3 flex items-center gap-1.5">
           <Camera className="w-3.5 h-3.5" /> Cliquez sur la photo pour changer votre avatar (max 5 Mo)
         </p>
       </div>
@@ -128,9 +128,9 @@ export default function ProfilePage() {
         <h2 className="font-display font-bold text-lg text-white">Modifier mes informations</h2>
 
         <div>
-          <label className="block text-sm font-medium text-white/80 mb-1.5">Nom d'utilisateur</label>
+          <label className="block text-sm font-medium text-ink-700 mb-1.5">Nom d'utilisateur</label>
           <div className="relative">
-            <AtSign className="absolute left-3.5 top-1/2 -translate-y-1/2 w-5 h-5 text-white/40" />
+            <AtSign className="absolute left-3.5 top-1/2 -translate-y-1/2 w-5 h-5 text-ink-400" />
             <input
               type="text"
               required
@@ -142,9 +142,9 @@ export default function ProfilePage() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-white/80 mb-1.5">Nom complet</label>
+          <label className="block text-sm font-medium text-ink-700 mb-1.5">Nom complet</label>
           <div className="relative">
-            <User className="absolute left-3.5 top-1/2 -translate-y-1/2 w-5 h-5 text-white/40" />
+            <User className="absolute left-3.5 top-1/2 -translate-y-1/2 w-5 h-5 text-ink-400" />
             <input
               type="text"
               required
@@ -156,7 +156,7 @@ export default function ProfilePage() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-white/80 mb-1.5">Bio</label>
+          <label className="block text-sm font-medium text-ink-700 mb-1.5">Bio</label>
           <textarea
             value={bio}
             onChange={(e) => setBio(e.target.value)}

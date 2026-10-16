@@ -89,7 +89,7 @@ export default function VideoPlayer({ src, poster, title }: VideoPlayerProps) {
   return (
     <div
       ref={containerRef}
-      className="relative w-full aspect-video bg-ink-950 rounded-2xl overflow-hidden group"
+      className="relative w-full aspect-video bg-night-950 rounded-2xl overflow-hidden group"
       onMouseMove={onActivity}
       onMouseLeave={() => playing && setShowControls(false)}
     >
@@ -110,14 +110,14 @@ export default function VideoPlayer({ src, poster, title }: VideoPlayerProps) {
 
       {buffering && (
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <Loader2 className="w-10 h-10 text-white/80 animate-spin" />
+          <Loader2 className="w-10 h-10 text-ink-700 animate-spin" />
         </div>
       )}
 
       {!playing && !buffering && (
         <button
           onClick={togglePlay}
-          className="absolute inset-0 flex items-center justify-center bg-ink-950/30 transition-opacity"
+          className="absolute inset-0 flex items-center justify-center bg-night-950/30 transition-opacity"
           aria-label="Lecture"
         >
           <span className="w-16 h-16 rounded-full bg-sakura-500/150/90 flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform">
@@ -127,12 +127,12 @@ export default function VideoPlayer({ src, poster, title }: VideoPlayerProps) {
       )}
 
       {title && (
-        <div className={`absolute top-0 left-0 right-0 p-4 bg-gradient-to-b from-ink-950/70 to-transparent transition-opacity duration-300 ${showControls ? "opacity-100" : "opacity-0"}`}>
+        <div className={`absolute top-0 left-0 right-0 p-4 bg-gradient-to-b from-night-950/70 to-transparent transition-opacity duration-300 ${showControls ? "opacity-100" : "opacity-0"}`}>
           <p className="text-white font-medium text-sm truncate">{title}</p>
         </div>
       )}
 
-      <div className={`absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-ink-950/80 to-transparent transition-opacity duration-300 ${showControls ? "opacity-100" : "opacity-0"}`}>
+      <div className={`absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-night-950/80 to-transparent transition-opacity duration-300 ${showControls ? "opacity-100" : "opacity-0"}`}>
         <input
           type="range"
           min="0"
@@ -150,7 +150,7 @@ export default function VideoPlayer({ src, poster, title }: VideoPlayerProps) {
           <button onClick={toggleMute} className="text-white hover:text-sakura-300 transition-colors" aria-label={muted ? "Activer le son" : "Couper le son"}>
             {muted ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}
           </button>
-          <span className="text-xs text-white/80 font-mono tabular-nums">
+          <span className="text-xs text-ink-700 font-mono tabular-nums">
             {formatTime(videoRef.current?.currentTime ?? 0)} / {formatTime(duration)}
           </span>
           <div className="flex-1" />
@@ -172,15 +172,15 @@ export default function VideoPlayer({ src, poster, title }: VideoPlayerProps) {
 
 export function LockedVideoPlayer({ poster, title, onUnlock, unlockLabel }: { poster?: string; title?: string; onUnlock?: () => void; unlockLabel: string }) {
   return (
-    <div className="relative w-full aspect-video bg-ink-950 rounded-2xl overflow-hidden">
+    <div className="relative w-full aspect-video bg-night-950 rounded-2xl overflow-hidden">
       {poster && <img src={poster} alt="" className="w-full h-full object-cover opacity-40" />}
       <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 p-6 text-center">
-        <div className="w-16 h-16 rounded-full bg-ink-900/80 flex items-center justify-center backdrop-blur-sm">
+        <div className="w-16 h-16 rounded-full bg-night-900/80 flex items-center justify-center backdrop-blur-sm">
           <Lock className="w-7 h-7 text-sakura-400" />
         </div>
         <div>
           {title && <p className="text-white font-semibold mb-1">{title}</p>}
-          <p className="text-white/30 text-sm">Achetez ce tutoriel pour débloquer la vidéo complète</p>
+          <p className="text-ink-300 text-sm">Achetez ce tutoriel pour débloquer la vidéo complète</p>
         </div>
         {onUnlock && (
           <button className="btn-primary text-sm" onClick={onUnlock}>
