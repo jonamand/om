@@ -94,7 +94,7 @@ export default function PaymentReturnPage() {
           <Loader2 className="w-8 h-8 text-sakura-400 animate-spin" />
         </div>
         <h1 className="font-display font-extrabold text-xl text-white mb-2">Vérification du paiement...</h1>
-        <p className="text-ink-500">Nous confirmons votre transaction auprès de K-Pay.</p>
+        <p className="text-white/70">Nous confirmons votre transaction auprès de K-Pay.</p>
       </div>
     );
   }
@@ -106,7 +106,7 @@ export default function PaymentReturnPage() {
           <AlertCircle className="w-8 h-8 text-sun-500" />
         </div>
         <h1 className="font-display font-extrabold text-xl text-white mb-2">Paiement en cours de traitement</h1>
-        <p className="text-ink-500 mb-6">Votre paiement est en cours de confirmation. Vous pouvez vérifier le statut dans votre espace.</p>
+        <p className="text-white/70 mb-6">Votre paiement est en cours de confirmation. Vous pouvez vérifier le statut dans votre espace.</p>
         <Link to="/mon-espace" className="btn-primary">Voir mes commandes</Link>
       </div>
     );
@@ -119,7 +119,7 @@ export default function PaymentReturnPage() {
           <X className="w-8 h-8 text-error-500" />
         </div>
         <h1 className="font-display font-extrabold text-xl text-white mb-2">Paiement échoué</h1>
-        <p className="text-ink-500 mb-6">La transaction n'a pas abouti. Aucun montant n'a été débité.</p>
+        <p className="text-white/70 mb-6">La transaction n'a pas abouti. Aucun montant n'a été débité.</p>
         <div className="flex gap-3 justify-center">
           <Link to="/panier" className="btn-primary">Réessayer</Link>
           <Link to="/boutique" className="btn-outline">Retour à la boutique</Link>
@@ -134,13 +134,13 @@ export default function PaymentReturnPage() {
         <Check className="w-10 h-10 text-matcha-300" />
       </div>
       <h1 className="font-display font-extrabold text-2xl text-white mb-2">Paiement confirmé !</h1>
-      <p className="text-ink-500 mb-6">
+      <p className="text-white/70 mb-6">
         Merci pour votre achat. Vos fichiers sont maintenant disponibles dans votre espace.
       </p>
       {orderId && (
         <div className="card p-5 mb-6 text-left">
           <div className="flex items-center justify-between">
-            <span className="text-sm text-ink-500">N° de commande</span>
+            <span className="text-sm text-white/70">N° de commande</span>
             <span className="font-mono font-bold text-white">#{orderId.slice(0, 8).toUpperCase()}</span>
           </div>
         </div>

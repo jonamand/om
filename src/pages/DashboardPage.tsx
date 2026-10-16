@@ -26,8 +26,8 @@ const roleBadgeConfig: Record<string, { icon: typeof Crown; label: string; color
   admin_content: { icon: Shield, label: "Admin Contenu", color: "text-cyan-300", bg: "bg-cyan-500/15" },
   admin_moderation: { icon: Zap, label: "Modérateur", color: "text-matcha-300", bg: "bg-matcha-500/15" },
   creator: { icon: Star, label: "Créateur", color: "text-sakura-300", bg: "bg-sakura-500/15" },
-  organizer: { icon: Star, label: "Organisateur", color: "text-ink-600", bg: "bg-white/5" },
-  user: { icon: Star, label: "Membre Otaku", color: "text-ink-500", bg: "bg-white/5" },
+  organizer: { icon: Star, label: "Organisateur", color: "text-white/80", bg: "bg-white/5" },
+  user: { icon: Star, label: "Membre Otaku", color: "text-white/70", bg: "bg-white/5" },
 };
 
 export default function DashboardPage() {
@@ -94,7 +94,7 @@ export default function DashboardPage() {
           </div>
           <div>
             <h1 className="font-display font-extrabold text-2xl text-white">Mon espace</h1>
-            <p className="text-ink-500 text-sm mt-0.5">Bienvenue, {profile?.full_name ?? profile?.username}</p>
+            <p className="text-white/70 text-sm mt-0.5">Bienvenue, {profile?.full_name ?? profile?.username}</p>
             <span className={`badge mt-1 ${badge.bg} ${badge.color}`}>
               <badge.icon className="w-3.5 h-3.5" /> {badge.label}
             </span>
@@ -111,7 +111,7 @@ export default function DashboardPage() {
             </div>
             <div>
               <p className="text-2xl font-display font-bold text-white">{orders.length}</p>
-              <p className="text-xs text-ink-400">Commandes</p>
+              <p className="text-xs text-white/55">Commandes</p>
             </div>
           </div>
         </div>
@@ -122,7 +122,7 @@ export default function DashboardPage() {
             </div>
             <div>
               <p className="text-2xl font-display font-bold text-white">{formatPrice(totalSpent)}</p>
-              <p className="text-xs text-ink-400">Total dépensé</p>
+              <p className="text-xs text-white/55">Total dépensé</p>
             </div>
           </div>
         </div>
@@ -133,7 +133,7 @@ export default function DashboardPage() {
             </div>
             <div>
               <p className="text-2xl font-display font-bold text-white">{activeTickets.length}</p>
-              <p className="text-xs text-ink-400">Billets actifs</p>
+              <p className="text-xs text-white/55">Billets actifs</p>
             </div>
           </div>
         </div>
@@ -153,8 +153,8 @@ export default function DashboardPage() {
             </div>
           ) : orders.length === 0 ? (
             <div className="text-center py-8">
-              <ShoppingBag className="w-10 h-10 text-ink-200 mx-auto mb-3" />
-              <p className="text-sm text-ink-500 mb-3">Aucun achat pour le moment</p>
+              <ShoppingBag className="w-10 h-10 text-white/35 mx-auto mb-3" />
+              <p className="text-sm text-white/70 mb-3">Aucun achat pour le moment</p>
               <Link to="/boutique" className="btn-outline text-sm">Découvrir la boutique</Link>
             </div>
           ) : (
@@ -163,7 +163,7 @@ export default function DashboardPage() {
                 <div key={order.id} className="flex items-center justify-between p-3 rounded-xl bg-night-400/50">
                   <div>
                     <p className="font-mono text-sm font-bold text-white">#{order.id.slice(0, 8).toUpperCase()}</p>
-                    <p className="text-xs text-ink-400">{formatDate(order.created_at)}</p>
+                    <p className="text-xs text-white/55">{formatDate(order.created_at)}</p>
                   </div>
                   <div className="text-right">
                     <p className="font-bold text-white">{formatPrice(Number(order.total))}</p>
@@ -189,8 +189,8 @@ export default function DashboardPage() {
             </div>
           ) : tickets.length === 0 ? (
             <div className="text-center py-8">
-              <Calendar className="w-10 h-10 text-ink-200 mx-auto mb-3" />
-              <p className="text-sm text-ink-500 mb-3">Aucun billet pour le moment</p>
+              <Calendar className="w-10 h-10 text-white/35 mx-auto mb-3" />
+              <p className="text-sm text-white/70 mb-3">Aucun billet pour le moment</p>
               <Link to="/evenements" className="btn-outline text-sm">Voir les événements</Link>
             </div>
           ) : (
@@ -204,15 +204,15 @@ export default function DashboardPage() {
                   <div className="flex items-start justify-between mb-2">
                     <div>
                       <p className="font-semibold text-sm text-white">{ticket.event?.title ?? "Événement"}</p>
-                      <p className="text-xs text-ink-400">{ticket.event ? formatDate(ticket.event.event_date) : ""}</p>
+                      <p className="text-xs text-white/55">{ticket.event ? formatDate(ticket.event.event_date) : ""}</p>
                     </div>
-                    <span className={`badge ${ticket.status === "valid" ? "bg-matcha-500/15 text-matcha-300" : "bg-white/5 text-ink-500"}`}>
+                    <span className={`badge ${ticket.status === "valid" ? "bg-matcha-500/15 text-matcha-300" : "bg-white/5 text-white/70"}`}>
                       {ticket.status === "valid" ? "Valide" : ticket.status}
                     </span>
                   </div>
                   <div className="flex items-center gap-2 mt-2 pt-2 border-t border-white/5">
-                    <QrCode className="w-4 h-4 text-ink-500" />
-                    <span className="font-mono text-xs font-bold text-ink-700">{ticket.ticket_code}</span>
+                    <QrCode className="w-4 h-4 text-white/70" />
+                    <span className="font-mono text-xs font-bold text-white/90">{ticket.ticket_code}</span>
                     <span className="ml-auto text-xs text-sakura-300 font-medium">Voir le billet</span>
                   </div>
                 </button>
@@ -237,7 +237,7 @@ export default function DashboardPage() {
                 </div>
                 <div className="flex-1 min-w-0">
                   <p className="font-medium text-sm text-white line-clamp-1">{p.name}</p>
-                  <p className="text-xs text-ink-400 uppercase">{p.file_type}</p>
+                  <p className="text-xs text-white/55 uppercase">{p.file_type}</p>
                 </div>
                 <a href={p.file_url} download className="btn-outline text-sm py-2">
                   <Download className="w-4 h-4" /> Télécharger
@@ -279,7 +279,7 @@ export default function DashboardPage() {
                   </div>
                   <div className="p-4">
                     <p className="font-medium text-white line-clamp-1">{v.name}</p>
-                    <p className="text-xs text-ink-400 mt-1">Tutoriel vidéo · HD</p>
+                    <p className="text-xs text-white/55 mt-1">Tutoriel vidéo · HD</p>
                   </div>
                 </button>
               ))}
@@ -301,15 +301,15 @@ export default function DashboardPage() {
             <div className="flex items-center justify-between p-5 border-b border-white/5">
               <h3 className="font-display font-bold text-lg text-white">Mon billet</h3>
               <button onClick={() => setSelectedTicket(null)} className="p-2 rounded-lg hover:bg-white/5">
-                <X className="w-5 h-5 text-ink-500" />
+                <X className="w-5 h-5 text-white/70" />
               </button>
             </div>
             <div className="p-6 text-center">
               <p className="font-display font-bold text-xl text-white mb-1">{selectedTicket.event?.title ?? "Événement"}</p>
-              <p className="text-sm text-ink-500 mb-4">
+              <p className="text-sm text-white/70 mb-4">
                 {selectedTicket.event ? formatDate(selectedTicket.event.event_date, { weekday: "long", day: "numeric", month: "long", year: "numeric" }) : ""}
               </p>
-              <p className="text-sm text-ink-600 mb-4">{selectedTicket.event?.venue}, {selectedTicket.event?.city}</p>
+              <p className="text-sm text-white/80 mb-4">{selectedTicket.event?.venue}, {selectedTicket.event?.city}</p>
 
               <div className="inline-flex p-4 bg-white/5 rounded-2xl border-2 border-white/5 mb-4">
                 <QRCodeSVG
@@ -321,15 +321,15 @@ export default function DashboardPage() {
               </div>
 
               <div className="bg-night-400/50 rounded-xl p-3 mb-4">
-                <p className="text-xs text-ink-400 mb-1">Code unique</p>
+                <p className="text-xs text-white/55 mb-1">Code unique</p>
                 <p className="font-mono font-bold text-white text-sm">{selectedTicket.ticket_code}</p>
               </div>
 
               <div className="flex items-center justify-center gap-2">
-                <span className={`badge ${selectedTicket.status === "valid" ? "bg-matcha-500/15 text-matcha-300" : "bg-white/5 text-ink-500"}`}>
+                <span className={`badge ${selectedTicket.status === "valid" ? "bg-matcha-500/15 text-matcha-300" : "bg-white/5 text-white/70"}`}>
                   {selectedTicket.status === "valid" ? "Valide" : selectedTicket.status}
                 </span>
-                <span className="text-xs text-ink-400">Acheteur: {profile?.full_name ?? profile?.username}</span>
+                <span className="text-xs text-white/55">Acheteur: {profile?.full_name ?? profile?.username}</span>
               </div>
             </div>
           </div>

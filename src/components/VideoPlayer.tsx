@@ -110,7 +110,7 @@ export default function VideoPlayer({ src, poster, title }: VideoPlayerProps) {
 
       {buffering && (
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <Loader2 className="w-10 h-10 text-ink-700 animate-spin" />
+          <Loader2 className="w-10 h-10 text-white/90 animate-spin" />
         </div>
       )}
 
@@ -150,7 +150,7 @@ export default function VideoPlayer({ src, poster, title }: VideoPlayerProps) {
           <button onClick={toggleMute} className="text-white hover:text-sakura-300 transition-colors" aria-label={muted ? "Activer le son" : "Couper le son"}>
             {muted ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}
           </button>
-          <span className="text-xs text-ink-700 font-mono tabular-nums">
+          <span className="text-xs text-white/90 font-mono tabular-nums">
             {formatTime(videoRef.current?.currentTime ?? 0)} / {formatTime(duration)}
           </span>
           <div className="flex-1" />
@@ -180,7 +180,7 @@ export function LockedVideoPlayer({ poster, title, onUnlock, unlockLabel }: { po
         </div>
         <div>
           {title && <p className="text-white font-semibold mb-1">{title}</p>}
-          <p className="text-ink-300 text-sm">Achetez ce tutoriel pour débloquer la vidéo complète</p>
+          <p className="text-white/45 text-sm">Achetez ce tutoriel pour débloquer la vidéo complète</p>
         </div>
         {onUnlock && (
           <button className="btn-primary text-sm" onClick={onUnlock}>

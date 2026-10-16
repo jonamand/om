@@ -196,7 +196,7 @@ export default function DigitalFileUploadField({ fileType, value, onChange }: Di
           {uploading ? (
             <div className="flex flex-col items-center gap-3">
               <Loader2 className="w-8 h-8 text-sakura-400 animate-spin" />
-              <p className="text-sm font-medium text-ink-700">Téléversement en cours...</p>
+              <p className="text-sm font-medium text-white/90">Téléversement en cours...</p>
               {progress > 0 && (
                 <div className="w-48 h-1.5 bg-white/10 rounded-full overflow-hidden">
                   <div className="h-full bg-sakura-500/150 rounded-full transition-all" style={{ width: `${progress}%` }} />
@@ -210,7 +210,7 @@ export default function DigitalFileUploadField({ fileType, value, onChange }: Di
               </div>
               <div>
                 <p className="text-sm font-semibold text-white">Fichier lié</p>
-                <p className="text-xs text-ink-400 mt-0.5 max-w-xs truncate">{value}</p>
+                <p className="text-xs text-white/55 mt-0.5 max-w-xs truncate">{value}</p>
               </div>
               <button
                 type="button"
@@ -225,10 +225,10 @@ export default function DigitalFileUploadField({ fileType, value, onChange }: Di
               <div className="dfu-icon bg-sakura-500/15 text-sakura-400">
                 <Icon className="w-6 h-6" />
               </div>
-              <p className="text-sm font-semibold text-ink-700">
+              <p className="text-sm font-semibold text-white/90">
                 Cliquez ou glissez votre fichier ici
               </p>
-              <p className="text-xs text-ink-400">
+              <p className="text-xs text-white/55">
                 {config.extensions} — jusqu'à {formatBytes(config.maxSize)}
               </p>
             </div>
@@ -258,7 +258,7 @@ export default function DigitalFileUploadField({ fileType, value, onChange }: Di
               </button>
             )}
           </div>
-          <p className="text-xs text-ink-400">
+          <p className="text-xs text-white/55">
             Collez le lien direct vers le fichier hébergé (CDN, Cloudinary, AWS S3, Google Drive, etc.)
           </p>
         </div>
@@ -273,7 +273,7 @@ export default function DigitalFileUploadField({ fileType, value, onChange }: Di
 
       {isVideo && mode === "upload" && (
         <div className="mt-3">
-          <p className="text-xs font-semibold text-ink-500 mb-2">Aperçu vidéo</p>
+          <p className="text-xs font-semibold text-white/70 mb-2">Aperçu vidéo</p>
           <video
             src={value}
             controls

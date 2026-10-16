@@ -16,7 +16,7 @@ const eventTypeColors: Record<string, string> = {
   cosplay_contest: "bg-matcha-500/150/15 text-matcha-300",
   esport_tournament: "bg-cyan-500/15 text-cyan-300",
   screening: "bg-sun-500/150/15 text-sun-300",
-  workshop: "bg-white/10 text-ink-600",
+  workshop: "bg-white/10 text-white/80",
 };
 
 export function EventCard({ event }: { event: EventItem }) {
@@ -36,7 +36,7 @@ export function EventCard({ event }: { event: EventItem }) {
           loading="lazy"
         />
         <div className="absolute top-3 left-3 rounded-xl px-3 py-1.5 text-center backdrop-blur-md border border-white/10 bg-night-600/80">
-          <p className="text-[10px] uppercase font-semibold text-ink-500 leading-none">
+          <p className="text-[10px] uppercase font-semibold text-white/70 leading-none">
             {formatDateShort(event.event_date).split(" ")[1]}
           </p>
           <p className="text-xl font-bold text-white leading-none mt-0.5">
@@ -47,7 +47,7 @@ export function EventCard({ event }: { event: EventItem }) {
 
       <div className="p-4 sm:p-5 flex-1 flex flex-col">
         <div className="flex items-start justify-between gap-2 mb-2">
-          <span className={`badge ${eventTypeColors[event.event_type] ?? "bg-white/10 text-ink-600"}`}>
+          <span className={`badge ${eventTypeColors[event.event_type] ?? "bg-white/10 text-white/80"}`}>
             {eventTypeLabels[event.event_type] ?? event.event_type}
           </span>
           {event.is_free ? (
@@ -63,13 +63,13 @@ export function EventCard({ event }: { event: EventItem }) {
           {event.title}
         </h3>
 
-        <div className="mt-3 space-y-1.5 text-sm text-ink-500">
+        <div className="mt-3 space-y-1.5 text-sm text-white/70">
           <div className="flex items-center gap-2">
-            <Calendar className="w-4 h-4 text-ink-300 flex-shrink-0" />
+            <Calendar className="w-4 h-4 text-white/45 flex-shrink-0" />
             <span>{formatDate(event.event_date, { day: "numeric", month: "long", year: "numeric" })}</span>
           </div>
           <div className="flex items-center gap-2">
-            <MapPin className="w-4 h-4 text-ink-300 flex-shrink-0" />
+            <MapPin className="w-4 h-4 text-white/45 flex-shrink-0" />
             <span className="line-clamp-1">{event.venue}, {event.city}</span>
           </div>
         </div>
@@ -77,13 +77,13 @@ export function EventCard({ event }: { event: EventItem }) {
         <div className="mt-auto pt-4 flex items-center justify-between">
           {!isPast && spotsLeft > 0 ? (
             <div className="flex items-center gap-2 text-sm">
-              <Users className="w-4 h-4 text-ink-300" />
-              <span className="text-ink-600">
+              <Users className="w-4 h-4 text-white/45" />
+              <span className="text-white/80">
                 {spotsLeft} place{spotsLeft > 1 ? "s" : ""} restante{spotsLeft > 1 ? "s" : ""}
               </span>
             </div>
           ) : isPast ? (
-            <span className="text-sm text-ink-400">Événement passé</span>
+            <span className="text-sm text-white/55">Événement passé</span>
           ) : (
             <span className="text-sm text-error-500 font-medium">Complet</span>
           )}

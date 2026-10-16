@@ -138,7 +138,7 @@ export default function CheckoutPage() {
     return (
       <div className="max-w-2xl mx-auto px-4 py-20 text-center">
         <h1 className="font-display font-bold text-2xl text-white mb-2">Panier vide</h1>
-        <p className="text-ink-500 mb-6">Ajoutez des produits avant de passer commande.</p>
+        <p className="text-white/70 mb-6">Ajoutez des produits avant de passer commande.</p>
         <Link to="/boutique" className="btn-primary">Aller à la boutique</Link>
       </div>
     );
@@ -146,7 +146,7 @@ export default function CheckoutPage() {
 
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 animate-fade-in">
-      <Link to="/panier" className="flex items-center gap-2 text-sm text-ink-500 hover:text-white mb-4 transition-colors">
+      <Link to="/panier" className="flex items-center gap-2 text-sm text-white/70 hover:text-white mb-4 transition-colors">
         <ArrowLeft className="w-4 h-4" /> Retour au panier
       </Link>
 
@@ -159,7 +159,7 @@ export default function CheckoutPage() {
               <ShieldCheck className="w-6 h-6 text-matcha-300" />
               <div>
                 <h2 className="font-display font-bold text-lg text-white">Paiement sécurisé via K-Pay</h2>
-                <p className="text-sm text-ink-400">Mobile Money, carte bancaire et PayPal</p>
+                <p className="text-sm text-white/55">Mobile Money, carte bancaire et PayPal</p>
               </div>
             </div>
             <div className="space-y-3">
@@ -167,21 +167,21 @@ export default function CheckoutPage() {
                 <div className="w-10 h-10 rounded-xl bg-matcha-100 flex items-center justify-center text-lg">📱</div>
                 <div>
                   <p className="font-semibold text-white text-sm">Mobile Money</p>
-                  <p className="text-xs text-ink-400">MTN, Orange, Wave, MoMo, M-Pesa et plus</p>
+                  <p className="text-xs text-white/55">MTN, Orange, Wave, MoMo, M-Pesa et plus</p>
                 </div>
               </div>
               <div className="flex items-center gap-3 p-4 rounded-xl bg-night-400/50">
                 <div className="w-10 h-10 rounded-xl bg-sky-100 flex items-center justify-center text-lg">💳</div>
                 <div>
                   <p className="font-semibold text-white text-sm">Carte bancaire</p>
-                  <p className="text-xs text-ink-400">Visa, Mastercard</p>
+                  <p className="text-xs text-white/55">Visa, Mastercard</p>
                 </div>
               </div>
               <div className="flex items-center gap-3 p-4 rounded-xl bg-night-400/50">
                 <div className="w-10 h-10 rounded-xl bg-sky-100 flex items-center justify-center text-lg">🅿️</div>
                 <div>
                   <p className="font-semibold text-white text-sm">PayPal</p>
-                  <p className="text-xs text-ink-400">Paiement international</p>
+                  <p className="text-xs text-white/55">Paiement international</p>
                 </div>
               </div>
             </div>
@@ -211,7 +211,7 @@ export default function CheckoutPage() {
                 </div>
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-medium text-white line-clamp-1">{item.product.name}</p>
-                  <p className="text-xs text-ink-400">Quantité: {item.quantity}</p>
+                  <p className="text-xs text-white/55">Quantité: {item.quantity}</p>
                 </div>
                 <p className="text-sm font-bold text-white">{formatPrice(item.product.price * item.quantity)}</p>
               </div>
@@ -219,11 +219,11 @@ export default function CheckoutPage() {
           </div>
           <div className="border-t border-white/5 pt-4 space-y-2">
             <div className="flex justify-between text-sm">
-              <span className="text-ink-500">Sous-total</span>
+              <span className="text-white/70">Sous-total</span>
               <span className="font-medium">{total <= 0 ? "Gratuit" : formatPrice(total)}</span>
             </div>
             <div className="flex justify-between text-sm">
-              <span className="text-ink-500">Livraison</span>
+              <span className="text-white/70">Livraison</span>
               <span className="font-medium text-matcha-300">Gratuit</span>
             </div>
             <div className="flex justify-between pt-2 border-t border-white/5">

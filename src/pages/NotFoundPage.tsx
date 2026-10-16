@@ -14,7 +14,7 @@ export default function NotFoundPage() {
           </div>
         </div>
         <h1 className="font-display font-extrabold text-3xl text-white mb-3">Page introuvable</h1>
-        <p className="text-ink-500 mb-8">
+        <p className="text-white/70 mb-8">
           Cette page n'existe pas ou a été déplacée. Retournons à la communauté !
         </p>
         <div className="flex gap-3 justify-center">

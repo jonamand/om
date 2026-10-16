@@ -25,7 +25,7 @@ export function ProductCard({ product }: { product: Product }) {
           loading="lazy"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-night-600/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-        <span className="absolute top-3 left-3 badge bg-white/10 backdrop-blur-md text-ink-700 border border-white/10 uppercase">
+        <span className="absolute top-3 left-3 badge bg-white/10 backdrop-blur-md text-white/90 border border-white/10 uppercase">
           {product.file_type}
         </span>
         {product.download_count > 200 && (
@@ -54,10 +54,10 @@ export function ProductCard({ product }: { product: Product }) {
           {avgRating > 0 && (
             <div className="flex items-center gap-1">
               <Star className="w-3.5 h-3.5 fill-sun-400 text-sun-400" />
-              <span className="text-xs font-medium text-ink-600">{avgRating.toFixed(1)}</span>
+              <span className="text-xs font-medium text-white/80">{avgRating.toFixed(1)}</span>
             </div>
           )}
-          <span className="text-xs text-ink-400">{product.download_count} téléchargements</span>
+          <span className="text-xs text-white/55">{product.download_count} téléchargements</span>
         </div>
 
         <div className="mt-auto pt-4 flex items-center justify-between">

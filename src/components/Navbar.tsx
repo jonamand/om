@@ -79,7 +79,7 @@ export default function Navbar() {
                 className={`px-4 py-2 rounded-xl font-medium text-sm transition-all duration-200 ${
                   location.pathname.startsWith(link.to)
                     ? "text-white bg-white/10"
-                    : "text-ink-600 hover:text-white hover:bg-white/5"
+                    : "text-white/80 hover:text-white hover:bg-white/5"
                 }`}
               >
                 {link.label}
@@ -89,7 +89,7 @@ export default function Navbar() {
 
           <div className="flex items-center gap-2">
             <button
-              className="p-2 text-ink-600 hover:text-white hover:bg-white/10 rounded-xl transition-all hidden sm:block"
+              className="p-2 text-white/80 hover:text-white hover:bg-white/10 rounded-xl transition-all hidden sm:block"
               aria-label="Rechercher"
             >
               <Search className="w-5 h-5" />
@@ -97,7 +97,7 @@ export default function Navbar() {
 
             {!isAdmin && (
               <button
-                className="relative p-2 text-ink-600 hover:text-white hover:bg-white/10 rounded-xl transition-all"
+                className="relative p-2 text-white/80 hover:text-white hover:bg-white/10 rounded-xl transition-all"
                 onClick={() => setOpen(true)}
                 aria-label="Panier"
               >
@@ -123,7 +123,7 @@ export default function Navbar() {
                       profile?.username?.[0]?.toUpperCase() ?? "U"
                     )}
                   </div>
-                  <span className="hidden sm:block text-sm font-medium text-ink-700">
+                  <span className="hidden sm:block text-sm font-medium text-white/90">
                     {profile?.username}
                   </span>
                 </button>
@@ -133,7 +133,7 @@ export default function Navbar() {
                     <div className="absolute right-0 mt-2 w-56 rounded-2xl shadow-xl border border-white/10 py-2 z-50 animate-slide-down backdrop-blur-xl bg-night-300/95">
                       <div className="px-4 py-2 border-b border-white/10">
                         <p className="text-sm font-semibold text-white">{profile?.full_name}</p>
-                        <p className="text-xs text-ink-400">{profile?.role.replace("_", " ")}</p>
+                        <p className="text-xs text-white/55">{profile?.role.replace("_", " ")}</p>
                       </div>
                       {isAdmin ? (
                         <Link to="/admin" className="flex items-center gap-3 px-4 py-2.5 text-sm text-white/70 hover:bg-white/5">
@@ -185,7 +185,7 @@ export default function Navbar() {
                   to={link.to}
                   className="flex items-center gap-3 px-4 py-3 rounded-xl text-white/70 hover:bg-white/5 font-medium"
                 >
-                  <link.icon className="w-5 h-5 text-ink-400" />
+                  <link.icon className="w-5 h-5 text-white/55" />
                   {link.label}
                 </Link>
               ))}

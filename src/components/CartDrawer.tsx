@@ -28,16 +28,16 @@ export default function CartDrawer() {
             className="p-2 hover:bg-white/5 rounded-xl transition-colors"
             onClick={() => setOpen(false)}
           >
-            <X className="w-5 h-5 text-ink-600" />
+            <X className="w-5 h-5 text-white/80" />
           </button>
         </div>
 
         {items.length === 0 ? (
           <div className="flex-1 flex flex-col items-center justify-center gap-4 p-8">
             <div className="w-20 h-20 rounded-2xl bg-white/5 flex items-center justify-center">
-              <ShoppingBag className="w-10 h-10 text-ink-300" />
+              <ShoppingBag className="w-10 h-10 text-white/45" />
             </div>
-            <p className="text-ink-500 text-center">Votre panier est vide</p>
+            <p className="text-white/70 text-center">Votre panier est vide</p>
             <Link to="/boutique" className="btn-primary" onClick={() => setOpen(false)}>
               Découvrir la boutique
             </Link>
@@ -85,7 +85,7 @@ export default function CartDrawer() {
                         <Plus className="w-3 h-3" />
                       </button>
                       <button
-                        className="ml-auto p-1.5 text-ink-400 hover:text-error-500"
+                        className="ml-auto p-1.5 text-white/55 hover:text-error-500"
                         onClick={() => removeItem(item.product.id)}
                       >
                         <Trash2 className="w-4 h-4" />
@@ -98,7 +98,7 @@ export default function CartDrawer() {
 
             <div className="border-t border-white/5 p-5 space-y-4">
               <div className="flex items-center justify-between">
-                <span className="text-ink-600 font-medium">Total</span>
+                <span className="text-white/80 font-medium">Total</span>
                 <span className="font-display font-bold text-xl text-white">
                   {formatPrice(total)}
                 </span>

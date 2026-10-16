@@ -35,7 +35,7 @@ export default function CommunityPage() {
             <h1 className="font-display font-extrabold text-3xl lg:text-4xl text-white mb-4 text-balance">
               La communauté geek d'Afrique, réunie
             </h1>
-            <p className="text-ink-300 leading-relaxed mb-6">
+            <p className="text-white/45 leading-relaxed mb-6">
               Suivez les actualités, rejoignez nos canaux sociaux et échangez avec des milliers de passionnés
               d'animé, de cosplay, de gaming et de culture pop.
             </p>
@@ -85,8 +85,8 @@ export default function CommunityPage() {
           </div>
         ) : articles.length === 0 ? (
           <div className="card p-12 text-center">
-            <Newspaper className="w-12 h-12 text-ink-200 mx-auto mb-3" />
-            <p className="text-ink-500">Aucune actualité pour le moment. Revenez bientôt !</p>
+            <Newspaper className="w-12 h-12 text-white/35 mx-auto mb-3" />
+            <p className="text-white/70">Aucune actualité pour le moment. Revenez bientôt !</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -101,11 +101,11 @@ export default function CommunityPage() {
                   />
                 </div>
                 <div className="p-5">
-                  <p className="text-xs text-ink-400 mb-2">{formatDate(article.created_at)}</p>
+                  <p className="text-xs text-white/55 mb-2">{formatDate(article.created_at)}</p>
                   <h3 className="font-display font-semibold text-lg text-white mb-2 group-hover:text-sakura-300 transition-colors line-clamp-2">
                     {article.title}
                   </h3>
-                  <p className="text-sm text-ink-500 line-clamp-3">{article.excerpt}</p>
+                  <p className="text-sm text-white/70 line-clamp-3">{article.excerpt}</p>
                   <span className="inline-flex items-center gap-1.5 text-sm font-medium text-sakura-300 mt-3 group-hover:gap-2.5 transition-all">
                     Lire l'article <ArrowRight className="w-4 h-4" />
                   </span>

@@ -100,7 +100,7 @@ export default function ShopPage() {
       <div className="bg-white/5 border-b border-white/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <h1 className="font-display font-extrabold text-3xl text-white mb-2">Boutique</h1>
-          <p className="text-ink-500">
+          <p className="text-white/70">
             Templates cosplay, patrons EVA Foam, fichiers 3D et tutoriels vidéo par des créateurs d'Afrique.
           </p>
         </div>
@@ -110,7 +110,7 @@ export default function ShopPage() {
         {/* Search + Sort */}
         <div className="flex flex-col sm:flex-row gap-3 mb-6">
           <form onSubmit={handleSearch} className="relative flex-1">
-            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-5 h-5 text-ink-400" />
+            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-5 h-5 text-white/55" />
             <input
               type="text"
               placeholder="Rechercher un produit, un tag..."
@@ -121,7 +121,7 @@ export default function ShopPage() {
             {searchInput && (
               <button
                 type="button"
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-ink-400 hover:text-ink-600"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-white/55 hover:text-white/80"
                 onClick={() => {
                   setSearchInput("");
                   updateParam("q", "");
@@ -149,7 +149,7 @@ export default function ShopPage() {
             className={`px-4 py-2 rounded-xl font-medium text-sm transition-all ${
               !selectedCategory
                 ? "bg-night-900 text-white"
-                : "bg-white/5 border border-white/10 text-ink-600 hover:border-white/15"
+                : "bg-white/5 border border-white/10 text-white/80 hover:border-white/15"
             }`}
             onClick={() => updateParam("categorie", "")}
           >
@@ -161,7 +161,7 @@ export default function ShopPage() {
               className={`px-4 py-2 rounded-xl font-medium text-sm transition-all ${
                 selectedCategory === cat.slug
                   ? "bg-night-900 text-white"
-                  : "bg-white/5 border border-white/10 text-ink-600 hover:border-white/15"
+                  : "bg-white/5 border border-white/10 text-white/80 hover:border-white/15"
               }`}
               onClick={() => updateParam("categorie", cat.slug)}
             >
@@ -179,7 +179,7 @@ export default function ShopPage() {
         </div>
 
         {/* Results count */}
-        <p className="text-sm text-ink-500 mb-4">
+        <p className="text-sm text-white/70 mb-4">
           {loading ? "Chargement..." : `${filteredProducts.length} produit${filteredProducts.length > 1 ? "s" : ""} trouvé${filteredProducts.length > 1 ? "s" : ""}`}
         </p>
 
@@ -193,10 +193,10 @@ export default function ShopPage() {
         ) : filteredProducts.length === 0 ? (
           <div className="card p-12 text-center">
             <div className="w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center mx-auto mb-4">
-              <SlidersHorizontal className="w-8 h-8 text-ink-300" />
+              <SlidersHorizontal className="w-8 h-8 text-white/45" />
             </div>
             <h3 className="font-display font-semibold text-lg text-white mb-2">Aucun produit trouvé</h3>
-            <p className="text-ink-500 mb-4">Essayez de modifier vos critères de recherche.</p>
+            <p className="text-white/70 mb-4">Essayez de modifier vos critères de recherche.</p>
             <button className="btn-outline" onClick={clearFilters}>
               Réinitialiser les filtres
             </button>

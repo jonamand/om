@@ -46,7 +46,7 @@ export default function SignUpPage() {
             </span>
           </Link>
           <h1 className="font-display font-extrabold text-2xl text-white mb-2">Créer un compte</h1>
-          <p className="text-ink-500">Rejoignez la communauté otaku d'Afrique de l'Ouest</p>
+          <p className="text-white/70">Rejoignez la communauté otaku d'Afrique de l'Ouest</p>
         </div>
 
         <div className="card p-6">
@@ -59,9 +59,9 @@ export default function SignUpPage() {
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <label className="block text-sm font-medium text-ink-700 mb-1.5">Nom d'utilisateur</label>
+                <label className="block text-sm font-medium text-white/90 mb-1.5">Nom d'utilisateur</label>
                 <div className="relative">
-                  <AtSign className="absolute left-3.5 top-1/2 -translate-y-1/2 w-5 h-5 text-ink-400" />
+                  <AtSign className="absolute left-3.5 top-1/2 -translate-y-1/2 w-5 h-5 text-white/55" />
                   <input
                     type="text"
                     required
@@ -73,9 +73,9 @@ export default function SignUpPage() {
                 </div>
               </div>
               <div>
-                <label className="block text-sm font-medium text-ink-700 mb-1.5">Nom complet</label>
+                <label className="block text-sm font-medium text-white/90 mb-1.5">Nom complet</label>
                 <div className="relative">
-                  <User className="absolute left-3.5 top-1/2 -translate-y-1/2 w-5 h-5 text-ink-400" />
+                  <User className="absolute left-3.5 top-1/2 -translate-y-1/2 w-5 h-5 text-white/55" />
                   <input
                     type="text"
                     required
@@ -89,9 +89,9 @@ export default function SignUpPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-ink-700 mb-1.5">Email</label>
+              <label className="block text-sm font-medium text-white/90 mb-1.5">Email</label>
               <div className="relative">
-                <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-5 h-5 text-ink-400" />
+                <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-5 h-5 text-white/55" />
                 <input
                   type="email"
                   required
@@ -104,9 +104,9 @@ export default function SignUpPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-ink-700 mb-1.5">Mot de passe</label>
+              <label className="block text-sm font-medium text-white/90 mb-1.5">Mot de passe</label>
               <div className="relative">
-                <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 w-5 h-5 text-ink-400" />
+                <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 w-5 h-5 text-white/55" />
                 <input
                   type="password"
                   required
@@ -118,7 +118,7 @@ export default function SignUpPage() {
               </div>
             </div>
 
-            <div className="flex items-start gap-2 text-xs text-ink-400">
+            <div className="flex items-start gap-2 text-xs text-white/55">
               <Check className="w-4 h-4 text-matcha-500 flex-shrink-0 mt-0.5" />
               <span>En créant un compte, vous acceptez nos conditions générales et notre politique de confidentialité.</span>
             </div>
@@ -128,7 +128,7 @@ export default function SignUpPage() {
             </button>
           </form>
 
-          <p className="text-center text-sm text-ink-500 mt-4">
+          <p className="text-center text-sm text-white/70 mt-4">
             Déjà inscrit ?{" "}
             <Link to="/connexion" className="text-sakura-300 font-medium hover:text-sakura-700">
               Se connecter

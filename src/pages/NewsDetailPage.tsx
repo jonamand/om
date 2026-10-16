@@ -47,13 +47,13 @@ export default function NewsDetailPage() {
   return (
     <div className="animate-fade-in">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <Link to="/communaute" className="inline-flex items-center gap-2 text-sm text-ink-500 hover:text-white mb-6 transition-colors">
+        <Link to="/communaute" className="inline-flex items-center gap-2 text-sm text-white/70 hover:text-white mb-6 transition-colors">
           <ArrowLeft className="w-4 h-4" /> Retour à la communauté
         </Link>
 
         <div className="flex items-center gap-3 mb-4">
           <span className="badge bg-sakura-500/15 text-sakura-300">News</span>
-          <span className="flex items-center gap-1.5 text-sm text-ink-400">
+          <span className="flex items-center gap-1.5 text-sm text-white/55">
             <Calendar className="w-3.5 h-3.5" /> {formatDate(article.created_at)}
           </span>
         </div>
@@ -65,7 +65,7 @@ export default function NewsDetailPage() {
         </div>
 
         <div className="prose prose-sm max-w-none">
-          <p className="text-ink-600 leading-relaxed whitespace-pre-line text-base">{article.content}</p>
+          <p className="text-white/80 leading-relaxed whitespace-pre-line text-base">{article.content}</p>
         </div>
 
         <div className="mt-8 pt-6 border-t border-white/5 flex items-center justify-between">
