@@ -14,26 +14,26 @@
 
 ## Visual design & UX direction
 
-- Global dark theme applied site-wide (A to Z).
-- Backgrounds: graphite black; surfaces: dark gray.
-- Primary actions (buttons, links): electric blue.
-- Secondary elements: steel blue.
-- Text: white and blue-gray for readability.
-- Status colors: green/yellow replaced with blue variants; red reserved strictly for errors and important alerts.
+- Global dark theme applied site-wide (A to Z), now using a purple/violet palette.
+- Backgrounds: deep purple; surfaces (cards, translucent header) also deep purple.
+- Primary actions (buttons, links): electric purple and magenta.
+- Secondary/soft elements: lavender.
+- Titles and important content: white; secondary text: lavender/blue-gray.
+- Status colors: lime green reserved for positive states and validations; red reserved strictly for errors and important alerts.
 - Components harmonized: navigation, cards, forms, animations, video player, admin table.
 - Scrollbars styled to match palette.
-- Avoid residual purple/pink hues (legacy theme).
+- Avoid residual blue/graphite hues (legacy palette) and any neutral-gray translucent surfaces.
 
 ## Decisions, constraints & rationale
 
 - Authentication uses email + password credentials stored in a database.
 - Sessions are token/cookie-based and persist independently of password changes; changing a password does not immediately invalidate active sessions.
 - Assistant has direct database access to modify user credentials.
-- Palette migration touched shared styles and admin space; no data or existing functionality modified.
+- Palette migration (blue/graphite → purple/violet) touched shared styles and admin space; translucent card/header surfaces corrected to deep purple; no data or existing functionality modified.
 - Build/compilation validated after palette change.
 
 ## Open questions & assumptions
 
 - Auth implementation details (JWT vs session cookies, password hashing) unconfirmed.
 - Backend stack and database type unknown.
-- Exact hex values for the palette not yet captured; directions inferred from design image and assistant implementation.
+- Exact hex values for the purple palette not yet captured; directions inferred from reference image and assistant implementation.
