@@ -1004,8 +1004,8 @@ function StatCard({ icon: Icon, label, value, sub, color, trend, trendUp }: {
 
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
-    <div>
-      <label className="block text-sm font-medium text-ink-700 mb-1.5">{label}</label>
+    <div className="min-w-0">
+      <label className="block text-sm font-medium text-ink-200 mb-1.5">{label}</label>
       {children}
     </div>
   );
@@ -1473,10 +1473,10 @@ function CategoryModal({ categories, onClose, onSaved, logAction }: {
 function ModalShell({ title, onClose, children, wide }: { title: string; onClose: () => void; children: React.ReactNode; wide?: boolean }) {
   return (
     <div className="fixed inset-0 bg-ink-950/40 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-fade-in" onClick={onClose}>
-      <div className={`bg-white rounded-2xl shadow-2xl w-full ${wide ? "max-w-2xl" : "max-w-lg"} max-h-[90vh] overflow-y-auto animate-scale-in`} onClick={(e) => e.stopPropagation()}>
-        <div className="flex items-center justify-between p-5 border-b border-ink-100 sticky top-0 bg-white z-10">
-          <h2 className="font-display font-bold text-lg text-ink-900">{title}</h2>
-          <button className="p-2 hover:bg-ink-100 rounded-xl" onClick={onClose}><X className="w-5 h-5" /></button>
+      <div className={`bg-night-300 text-ink-50 rounded-2xl shadow-2xl shadow-black/40 w-full ${wide ? "max-w-2xl" : "max-w-lg"} max-h-[90vh] overflow-y-auto animate-scale-in`} onClick={(e) => e.stopPropagation()}>
+        <div className="flex items-center justify-between p-5 border-b border-white/10 sticky top-0 bg-night-300 z-10">
+          <h2 className="font-display font-bold text-lg text-white">{title}</h2>
+          <button className="p-2 text-ink-300 hover:text-white hover:bg-white/10 rounded-xl" onClick={onClose} aria-label="Fermer"><X className="w-5 h-5" /></button>
         </div>
         <div className="p-5">{children}</div>
       </div>
